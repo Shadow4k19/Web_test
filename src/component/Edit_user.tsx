@@ -57,7 +57,7 @@ interface combinedData{
     April?: string;
 }
 
-const Edit_user = () => {
+const Edit_user : React.FC = () => {
     const { username } = useParams();
 
     const [combinedData, setCombinedData] = useState<combinedData>({

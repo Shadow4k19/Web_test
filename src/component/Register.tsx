@@ -32,7 +32,7 @@ const Registerstyle = styled.div`
   }
 `
 
-const Register = () =>{
+const Register : React.FC = () =>{
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("") 
     const [Feburary, setFeb] = useState(0);

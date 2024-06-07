@@ -15,7 +15,7 @@ const LoginStyle = styled.div`
   }
 `
 
-const Login =()=>{
+const Login : React.FC =()=>{
     const [username , setUser] = useState("");
     const [pass, setPass] = useState("");
 
@@ -42,8 +42,8 @@ const Login =()=>{
               }
           });
               if(response.data.status === 200){
-                Cookie.set('username', username);
-                Cookie.set('role', response.data.role)
+                Cookie.set('username', username, { expires: 120 / (24 * 60) });
+                Cookie.set('role', response.data.role ,{ expires: 120 / (24 * 60) })
                 Cookie.set('isLoggedIn', 'true', { expires: 120 / (24 * 60) });
                 Swal.fire({
                   icon : "success",

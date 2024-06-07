@@ -2,15 +2,19 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const SortingStyle = styled.div`
+.section{
+    height: auto;
+    min-height: 100vh;
+    padding: 15% 0 0 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-    padding-top: 15%;
+    padding: 0 0 5% 0; 
     overflow-x: hidden;
     background-color: #CCBEBE;
     border-radius: 5px;
-    min-height: 100vh;
-    height: auto;
   }
   
   .text-container {
@@ -19,7 +23,7 @@ const SortingStyle = styled.div`
     align-items: center;
     margin-bottom: 20px;
     text-align: center;
-    padding-top: 2%;
+    padding: 2% 0 0 0;
   }
   
   .btn-container {
@@ -55,7 +59,7 @@ const SortingStyle = styled.div`
     } 
   }
 `
-const SortingPage = () =>{
+const SortingPage : React.FC = () =>{
     const [list, setList] = useState([4,1,3]);
 
     const getRandomNumber = (min : number, max : number) => {
@@ -154,18 +158,20 @@ const SortingPage = () =>{
     } 
     return(
         <SortingStyle>
-        <div className="container">
-            <div className="text-container">
-            <p className="home-text">List value: {list.join(", ")}</p>
-            </div>
-            <div className="btn-container">
-            <button onClick={shuffle}>Shuffle</button>
-            <button onClick={bubbleSort}>BBsort</button>
-            <button onClick={selectionsort}>SelectSort</button>
-            <button onClick={callquick}>QuickSort</button>
-            <button onClick={addRandomNumber}>Random Number</button>
-            <button onClick={resetnumber}>Reset</button>
-            </div>
+            <div className="section">
+                <div className="container">
+                    <div className="text-container">
+                    <p className="home-text">List value: {list.join(", ")}</p>
+                    </div>
+                    <div className="btn-container">
+                    <button onClick={shuffle}>Shuffle</button>
+                    <button onClick={bubbleSort}>BBsort</button>
+                    <button onClick={selectionsort}>SelectSort</button>
+                    <button onClick={callquick}>QuickSort</button>
+                    <button onClick={addRandomNumber}>Random Number</button>
+                    <button onClick={resetnumber}>Reset</button>
+                    </div>
+                </div>
         </div>
         </SortingStyle>
     )

@@ -29,22 +29,23 @@ createTheme('solarized', {
   }, 'dark');
 
 const User_manage = styled.div`
-    .container{ 
-        padding-top: 100px;
+    .section{
         min-height: 100vh;
         height: auto;
-        height: auto;
+        padding: 100px;
+    }
+    .container{ 
         color: #fff;
         background-color: #CCBEBE;
         border-radius: 5px;
+        //border: 2px solid #000;
     }
     h1{
         color: #000;
     }
-    .inside-container{
-        padding: 50px;
-        background-color: #583F3F;
-        border-radius: 5px;
+    .inside-con{
+        padding: 30px 0 0 0;
+        width:
     }
     table.dataTable {
         border-collapse: collapse;
@@ -100,7 +101,7 @@ const User_manage = styled.div`
         text-align: right;
     }
     .container-table{
-        padding-bottom: 10%;
+        padding-bottom: 5%;
     }
     .btn-success, .btn-danger{
         width: 100px;
@@ -115,6 +116,19 @@ const User_manage = styled.div`
     }
     .hqJJCC:disabled{
         fill: rgba(0, 0, 0, .35);
+    }
+    .text-con{
+        text-align: center;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 70px;
+        background-color: #CCBEBE;
+        //border: 2px solid #000;
+        border-radius: 5px;
+        padding: 0 10px;
+    }
+    p{
+        margin: 2% 0 0 0;
     }
     @media screen and (max-width:1200px){
         .btn-success, .btn-danger{
@@ -162,11 +176,10 @@ const UserComponent: React.FC = () => {
         fetchData();    
     }, []);
 
-    const handleEdit = (username : any) =>{
-        //go to page Edit
+    const handleEdit = (username : string) =>{
         window.location.href = `/edituser/${username}`
     }
-    const handleDelete = (id: any) => {
+    const handleDelete = (id: number) => {
         Swal.fire({
           title: 'Are you sure?',
           text: 'You will not be able to recover this data!',
@@ -311,37 +324,44 @@ const UserComponent: React.FC = () => {
 
     return (
         <User_manage>
-            <div className="container">
-                <div className="inside-con">
-                    <h1>User Management</h1>
-                    <div className="add"><button className="btn btn-secondary add" onClick={handleAdd}>Add User</button></div>
-                    <div className="container-table">
-                        {loading ? (
-                            <p>Loading...</p>
-                        ) : (
-                        <>
-                        <DataTable
-                            columns={columns}
-                            data={filteredData}
-                            pagination
-                            highlightOnHover
-                            theme="solarized"
-                            subHeaderAlign={Alignment.RIGHT}
-                            subHeader
-                            subHeaderComponent={
-                                <div className="input">
-                                    <input 
-                                    type="text"
-                                    placeholder="Search by username" 
-                                    className = "form-control"
-                                    value={search}
-                                    onChange={(e) => setSerch(e.target.value)}
-                                    />
+            <div className="section">
+                <div className="container">
+                    <div className="inside-con">
+                        <div className="text-con">
+                            <h1 className="text-title">User Management</h1>
+                        </div>
+                        {!loading ? (<div className="add"><button className="btn btn-secondary add" onClick={handleAdd}>Add User</button></div>
+                        ):null}
+                        <div className="container-table">
+                            {loading ? (
+                                <div className="container-loading">
+                                    <span className="loader"></span>
                                 </div>
-                            }
-                        />
-                        </>
-                        )}
+                            ) : (
+                            <>
+                            <DataTable
+                                columns={columns}
+                                data={filteredData}
+                                pagination
+                                highlightOnHover
+                                theme="solarized"
+                                subHeaderAlign={Alignment.RIGHT}
+                                subHeader
+                                subHeaderComponent={
+                                    <div className="input">
+                                        <input 
+                                        type="text"
+                                        placeholder="Search by username" 
+                                        className = "form-control"
+                                        value={search}
+                                        onChange={(e) => setSerch(e.target.value)}
+                                        />
+                                    </div>
+                                }
+                            />
+                            </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

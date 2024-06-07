@@ -3,14 +3,16 @@
     import Swal from "sweetalert2";
 
     const TicTacToCss = styled.div`
+        .section{
+            height: auto;
+            min-height: 100vh;
+            padding: 120px 0 120px 0; 
+        }
         .container{
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 5%;
-            padding-top: 5%;
-            height: auto;
-            min-height: 100vh;
+            padding: 5% 0 2% 0;
             flex-direction: column;
             overflow: hidden;
             background-color: #CCBEBE;
@@ -111,7 +113,7 @@
     }
     `;
 
-    const TicTacTo = () => {
+    const TicTacTo : React.FC = () => {
         const [currentPlayer, setCurrentPlayer] = useState("X");
         const [spaces, setSpaces] = useState(Array(9).fill(null));
         const [winningBoxes, setWinningBoxes] = useState<number[]>([]);
@@ -129,7 +131,7 @@
           [2, 4, 6]
         ];
       
-        const boxClicked = (index : any) => {
+        const boxClicked = (index : number) => {
           if (spaces[index] === null && winningBoxes.length === 0) {
             const newSpaces = [...spaces];
             newSpaces[index] = currentPlayer;
@@ -216,22 +218,22 @@
         }, [isGameDraw]);
         return (
             <TicTacToCss>
-                <div className="container">
-                    <h1>Tic Tac Toe</h1>
-                    <div id="gameboard">
-                    {spaces.map((value, index) => (
-                        <div
-                        className={`box ${winningBoxes.includes(index) ? "winning-box" : ""}`}
-                        key={index}
-                        id={index.toString()}
-                        onClick={() => boxClicked(index)}
-                        >
-                        {value}
+                <div className="section">
+                    <div className="container">
+                        <h1>Tic Tac Toe</h1>
+                        <div id="gameboard">
+                        {spaces.map((value, index) => (
+                            <div
+                            className={`box ${winningBoxes.includes(index) ? "winning-box" : ""}`}
+                            key={index}
+                            id={index.toString()}
+                            onClick={() => boxClicked(index)}
+                            >
+                            {value}
+                            </div>
+                        ))}
                         </div>
-                    ))}
-                    </div>
-                    <div className="btn">
-                        <button className="btn-danger" onClick={handleRestart}>Restart</button>
+                            <button className="btn-danger" onClick={handleRestart}>Restart</button>
                     </div>
                 </div>
             </TicTacToCss>

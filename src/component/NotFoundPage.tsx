@@ -16,7 +16,7 @@ h1,h2{
 }
 `;
 
-const NotFound =() =>{
+const NotFound : React.FC = () =>{
     return(
         <StyleText>
             <div className="container">

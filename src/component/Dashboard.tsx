@@ -85,7 +85,6 @@ const DashBoardstyle = styled.div`
     margin-top: 60px;
     height: auto;
   }
-  
   /* End Main  */
   
   /* <= 1200px */
@@ -230,7 +229,7 @@ const DashBoard: React.FC = () => {
         </div>
         <div className='main-cards'>
           {loading ? (
-            <p>Loading...</p>
+            <p></p>
           ) : (
             <>
               <div className='card'>
@@ -263,7 +262,9 @@ const DashBoard: React.FC = () => {
         </div>
         <div className='charts'>
           {loading ? (
-            <p>Loading Bar Chart...</p>
+            <div className="container-loading">
+              <span className="loader"></span>
+            </div>
           ) : (
             width < 600 ? (
               <BarChart
@@ -296,7 +297,9 @@ const DashBoard: React.FC = () => {
             )
           )}
           {loading ? (
-            <p>Loading Line Chart...</p>
+            <div className="container-loading">
+              <span className="loader"></span>
+            </div>
           ) : (
             width < 600 ? (
             <LineChart

@@ -41,7 +41,7 @@ interface combinedData{
     April: string;
 }
 
-const Add_user = () => {
+const Add_user : React.FC = () => {
 
     const [combinedData, setCombinedData] = useState<combinedData>({
         username: "",

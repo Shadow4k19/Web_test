@@ -16,11 +16,12 @@ const HomeCon = styled.div`
   .slider-container {
     display: flex;
     width: 100%;
-    background-color: #f7afe6;
+    background-color: #F5D7FF;
     margin-bottom: 60px;
   }
   .card-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, auto);
     grid-gap: 20px;
     justify-content: center;
     padding-top: 20px;
@@ -133,11 +134,6 @@ const HomeCon = styled.div`
     flex-direction: column;
     align-items: flex-start;
     flex: 1;
-  }
-  @media screen and (max-width: 1600px){
-    .card-container{
-      grid-template-columns: repeat(3, auto);
-    }
   }
   @media screen and (max-width: 1000px){
     .card-container{
@@ -254,12 +250,11 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="card">
-                        <img src = "https://i0.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?fit=845%2C503&ssl=1" 
-                            alt = ""/>
+                        <img src = "https://play-lh.googleusercontent.com/ILMYT7PYDpF1771O6lixyX01a3JEGYKotMshaq6rFFxQnZPGb_byVbfgMZRJlG4pITJPfqoUC0g=w1296-h2160-rw" />
                         <div className="card-content">
-                            <h3>Card5</h3>
-                            <p>Don't Have</p>
-                            <a href="/NotFound" className="btn">Go Page</a>
+                            <h3>Tetris</h3>
+                            <p>Tetris Game</p>
+                            <a href="/TeTris" className="btn">Go Page</a>
                         </div>
                     </div>
                     <div className="card">

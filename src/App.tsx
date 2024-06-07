@@ -18,7 +18,14 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import CookieConsent from "react-cookie-consent";
 import Breakout from './component/Breakout';
-
+import Tetris from './component/TeTris';
+import Manage from './component/Manage';
+import ManageSlideshow from './component/Manage_slideshow';
+import ManageContent from './component/Manage_content';
+import AddSlide from './component/Add_Slide';
+import EditSlide from './component/Edit_Slide';
+import AddContent from './component/Add_Content';
+import EditContent from './component/Edit_content';
 
 interface Props{
   currentpath: string;
@@ -38,7 +45,6 @@ const App: React.FC<Props> = ({currentpath}: any) => {
   }, []);
   useEffect(()=>{
     Cookies.set('path', currentpath);
-    console.log(Cookies.get('path'));
   },[currentpath])
   return (
     <>
@@ -53,6 +59,7 @@ const App: React.FC<Props> = ({currentpath}: any) => {
           <Route path='/TicTacTo' element = {<TicTacTo />} />
           <Route path='/MineSweeper' element = {<MineSwiper />} />
           <Route path='/Breakout' element = {<Breakout />} />
+          <Route path='/Tetris' element = {<Tetris />} />
           {loginstatus ? (
             <>
               <Route path='/Dashboard' element={<DashBoard />} />
@@ -61,6 +68,13 @@ const App: React.FC<Props> = ({currentpath}: any) => {
                   <Route path='/usermanagement' element={<User />} />
                   <Route path='/edituser/:username' element={<Edit_user />} />
                   <Route path='/adduser' element={<Add_user />} />
+                  <Route path='/Systemmanagement' element = {<Manage />}/>
+                  <Route path='/manageslideshow' element = {<ManageSlideshow />}/>
+                  <Route path='/managecontent' element = {<ManageContent />}/>
+                  <Route path='/manageslideshow/add' element= {<AddSlide />} />
+                  <Route path='/manageslideshow/edit/:id' element = {<EditSlide />}/>
+                  <Route path='/managecontent/add' element = {<AddContent />} />
+                  <Route path='/managecontent/edit/:id' element = {<EditContent />} />
                 </>
               )}
             </>

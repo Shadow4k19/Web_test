@@ -86,7 +86,7 @@ const MineStyle = styled.div`
   }
 `;
 
-const MineSwiper = () => {
+const MineSwiper : React.FC = () => {
   const [grid, setGrid] = useState<Cell[][]>([]);
   const [minesGenerated, setMinesGenerated] = useState(false);
   const [lockGame, setLockGame] = useState(false);
@@ -176,7 +176,7 @@ const MineSwiper = () => {
         setLockGame(true);
         Swal.fire({
             icon: "error",
-            title: "You dead Noob",
+            title: "You Dead",
         })
       } else {
         const cellElement = document.getElementById(`cell-${row}-${col}`);

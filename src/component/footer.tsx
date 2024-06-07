@@ -4,7 +4,7 @@ const FooterContainer = styled.footer`
     display: flex;
     justify-content: center;
     height: 150px;
-    background-color: #680451;
+    background-color: #F5D7FF;
     width: 100%;
 `;
 
@@ -16,7 +16,7 @@ const ContentContainer = styled.div`
 `;
 
 const Letter = styled.h1`
-    color: #fff;
+    color: #000;
     transition: transform 0.3s ease;
 
     &:hover {
@@ -28,7 +28,7 @@ const Letter = styled.h1`
     }
 `;
 
-const Footer = () => {
+const Footer : React.FC = () => {
     return (
         <FooterContainer>
             <ContentContainer>

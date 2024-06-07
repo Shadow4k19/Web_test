@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 interface Slide {
   url: string;
-  title: string;
 }
 
 interface SlideShowProps {
@@ -45,7 +44,7 @@ const Slidestyle = styled.div`
   }
   
   .slide img {
-    max-width: 100%;
+    width: 100%;
     height: 500px;
     object-fit: cover;
   }
@@ -69,29 +68,80 @@ const Slidestyle = styled.div`
     opacity: 0.5;
     transition: opacity 0.2s ease-in-out;
   }
+
   .dot.active {
     opacity: 1;
   }
+  
+  .container {
+    position: relative;
+  }
+  
+  .slide-show-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  
+  .prev-button,
+  .next-button {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 90px;
+  }
+  
+  .prev-button:hover,
+  .next-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .left-arrow {
+    font-size: 30px;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+  
+  .right-arrow {
+    font-size: 30px;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent white;
+  }
+
   @media screen and (max-width: 1000px){
     .slide img{
       height: 400px;
     }
   }
+  
   @media screen and (max-width: 800px){
     .slide img{
       height: 300px;
     }
   }
+  
   @media screen and (max-width: 600px){
     .slide img{
       height: 270px;
     }
   }
+  
   @media screen and (max-width: 500px){
     .slide img{
       height: 230px;
     }
   }
+  
   @media screen and (max-width: 400px){
     .slide img{
       height: 200px;
@@ -114,7 +164,13 @@ const SlideShow: React.FC<SlideShowProps> = ({ slideData, transitionTime = 3000,
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);
   };
-  
+  const handleNextClick = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % slideData.length);
+  };
+
+  const handlePrevClick = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + slideData.length) % slideData.length);
+  };
   return (
     <Slidestyle>
       <div className="container">
@@ -125,9 +181,17 @@ const SlideShow: React.FC<SlideShowProps> = ({ slideData, transitionTime = 3000,
                 key={index}
                 className={`slide ${index === currentSlide ? 'active' : ''}`}
               >
-                <img src={slide.url} alt={slide.title} className = "img-slide"/>
+                <img src={slide.url} alt= "" className = "img-slide"/>
               </div>
             ))}
+          </div>
+          <div className="slide-show-controls">
+            <button className="prev-button" onClick={handlePrevClick}>
+              <span className="arrow left-arrow">&#9664;</span>
+            </button>
+            <button className="next-button" onClick={handleNextClick}>
+              <span className="arrow right-arrow">&#9654;</span>
+            </button>
           </div>
           <div className="slide-show-dots">
             {slideData.map((_, index) => (

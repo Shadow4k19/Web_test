@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import Burger from './Burger';
-import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
 
 const Nav = styled.nav`
     width: 100%;
@@ -20,12 +18,6 @@ const Nav = styled.nav`
 `;
 
 const Navbar : React.FC = () =>{
-    const [path, setPath] = useState<string | undefined>(undefined);
-    useEffect(() =>{
-        const path1 = Cookies.get('path');
-        setPath(path1);
-    }, [])
-
     return(
         <div className="background">
             <Nav>

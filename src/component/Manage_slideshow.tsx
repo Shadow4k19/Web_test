@@ -135,8 +135,16 @@ const Slide_manage = styled.div`
         .btn-success, .btn-danger{
             width: 80px;
         }
-        .container{
-            //width: 100%;
+    }
+    @media screen and (max-width: 768px){
+        .text-con{
+            width: 120px;
+        }
+        .text-title{
+            font-size: 20px;
+        }
+        .jGKeEe{
+            overflow-x: auto;
         }
     }
 `;

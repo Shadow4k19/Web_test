@@ -26,6 +26,7 @@ import AddSlide from './component/Add_Slide';
 import EditSlide from './component/Edit_Slide';
 import AddContent from './component/Add_Content';
 import EditContent from './component/Edit_content';
+import NewsPage from './component/News_page';
 
 interface Props{
   currentpath: string;
@@ -55,11 +56,12 @@ const App: React.FC<Props> = ({currentpath}: any) => {
           <Route path = "/" element = {<Home />} />
           <Route path="/login" element = {<Login /> } />
           <Route path='/register' element = {<Register />} />
-          <Route path='/Sorting' element = {<SortingPage />} />
-          <Route path='/TicTacTo' element = {<TicTacTo />} />
-          <Route path='/MineSweeper' element = {<MineSwiper />} />
-          <Route path='/Breakout' element = {<Breakout />} />
-          <Route path='/Tetris' element = {<Tetris />} />
+          <Route path='/News/Sorting' element = {<SortingPage />} />
+          <Route path='/News/TicTacTo' element = {<TicTacTo />} />
+          <Route path='/News/MineSweeper' element = {<MineSwiper />} />
+          <Route path='/News/Breakout' element = {<Breakout />} />
+          <Route path='/News/Tetris' element = {<Tetris />} />
+          <Route path='/News/:id' element = {<NewsPage />} />
           {loginstatus ? (
             <>
               <Route path='/Dashboard' element={<DashBoard />} />

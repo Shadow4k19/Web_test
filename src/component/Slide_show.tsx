@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 interface Slide {
+  id: number;
   url: string;
 }
 
 interface SlideShowProps {
-  slideData: Slide[];
+  slideData: Slide[] | undefined;
   transitionTime?: number;
   dotColor?: string;
 }
@@ -152,23 +153,26 @@ const Slidestyle = styled.div`
 const SlideShow: React.FC<SlideShowProps> = ({ slideData, transitionTime = 3000, dotColor }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement>(null);
-
+  //console.log(slideData);
   useEffect(() => {
     const slideInterval = setInterval(() => {
+      if (!slideData || slideData.length === 0) return;
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slideData.length);
     }, transitionTime);
 
     return () => clearInterval(slideInterval);
-  }, [slideData.length, transitionTime]);
+  }, [slideData, transitionTime]);
 
   const handleDotClick = (index: number) => {
     setCurrentSlide(index);
   };
   const handleNextClick = () => {
+    if (!slideData || slideData.length === 0) return;
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slideData.length);
   };
 
   const handlePrevClick = () => {
+    if (!slideData || slideData.length === 0) return;
     setCurrentSlide((prevSlide) => (prevSlide - 1 + slideData.length) % slideData.length);
   };
   return (
@@ -176,7 +180,7 @@ const SlideShow: React.FC<SlideShowProps> = ({ slideData, transitionTime = 3000,
       <div className="container">
         <div className="slide-show">
           <div className="slide-show-inner" ref={slideRef}>
-            {slideData.map((slide, index) => (
+            {slideData?.map((slide, index) => (
               <div
                 key={index}
                 className={`slide ${index === currentSlide ? 'active' : ''}`}
@@ -194,7 +198,7 @@ const SlideShow: React.FC<SlideShowProps> = ({ slideData, transitionTime = 3000,
             </button>
           </div>
           <div className="slide-show-dots">
-            {slideData.map((_, index) => (
+            {slideData?.map((_, index) => (
               <div
                 key={index}
                 className={`dot ${index === currentSlide ? 'active' : ''}`}

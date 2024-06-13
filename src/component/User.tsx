@@ -135,6 +135,19 @@ const User_manage = styled.div`
             width: 80px;
         }
     }
+    
+    @media screen and (max-width: 768px){
+        .text-con{
+            width: 120px;
+            margin: 30px 0 0 0;
+        }
+        .text-title{
+            font-size: 20px;
+        }
+        .jGKeEe{
+            overflow-x: scroll;
+        }
+}
 `;
 
 

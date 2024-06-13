@@ -71,6 +71,8 @@ const AddSlidestyle = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        overflow: hidden;
+        max-height: 60px;
     }
 
     .drop-file-preview_item_del{
@@ -100,200 +102,193 @@ const AddSlidestyle = styled.div`
     }
 `;
 
-const EditContent : React.FC = () =>{
-
-    const { id } = useParams<{id: string}>();
+const EditContent = () => {
+    const { id } = useParams<{ id: string }>();
     const [file, setFile] = useState<File | null>(null);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-
-    useEffect (() => {
-        fetchdata();
-    },[])
-
-    const fetchdata = async() =>{
-        const response = await axios.get(`http://localhost/Server/Content.php?id=${id}`); 
-        if(response.data.status === 200){
-            setContent(response.data.data[0].content);
-            setTitle(response.data.data[0].title);
-        }else{
-            console.log("error");
+  
+    useEffect(() => {
+      fetchdata();
+    }, []);
+  
+    const fetchdata = async () => {
+      try {
+        const response = await axios.get(`http://localhost/Server/Content.php?id=${id}`);
+        if (response.data.status === 200) {
+          setContent(response.data.data[0].content);
+          setTitle(response.data.data[0].title);
+        } else {
+          console.error("Error fetching data");
         }
-    }
-
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+  
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-
+  
     const onDragEnter = () => {
-        wrapperRef.current?.classList.add('dragover');
+      wrapperRef.current?.classList.add("dragover");
     };
-
+  
     const onDragLeave = () => {
-        wrapperRef.current?.classList.remove('dragover');
+      wrapperRef.current?.classList.remove("dragover");
     };
-
+  
     const onDrop = () => {
-        wrapperRef.current?.classList.remove('dragover');
+      wrapperRef.current?.classList.remove("dragover");
     };
-
+  
     const handleSubmit = async () => {
         console.log("Submitting");
         try {
-            if (!title || !content) {
-                Swal.fire({
-                    icon: "warning",
-                    text: "Title and content are required",
-                });
-                return;
-            }
-    
-            let requestData: any = {
-                title: title,
-                content: content
-            };
-    
-            if (file) {
-                const base64Data = await new Promise<string>((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onload = () => {
-                        const base64Url = reader.result as string;
-                        if (typeof base64Url === 'string') {
-                            resolve(base64Url.split(",")[1]);
-                        } else {
-                            reject(new Error("File reading error"));
-                        }
-                    };
-                    reader.onerror = error => reject(error);
-                });
-                requestData.img = base64Data;
-            }
-    
-            if (id) {
-                requestData.id = id;
-            }
-    
-            const response = await axios.put("http://localhost/Server/Content.php", {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            });
-    
-            if (response.data.status === 200) {
-                Swal.fire({
-                    icon: "success",
-                    text: response.data.message,
-                }).then(() => {
-                    window.location.href = "/managecontent";
-                });
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    text: response.data.message,
-                });
-            }
-        } catch (error) {
-            console.error(error);
+          if (!title || !content) {
             Swal.fire({
-                icon: "error",
-                text: "An error occurred during submission",
+              icon: "warning",
+              text: "Title and content are required",
             });
-        }
-    };    
-
-    const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (files && files.length > 0) {
-            const file = files[0];
-            const fileName = file.name.toLowerCase();
-            if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
-                setFile(file);
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    text: 'Only PNG, JPG, and JPEG files are allowed.'
-                });
-                e.target.value = '';
-            }
-        }
-    };    
+            return;
+          }
     
-    return(
-        <AddSlidestyle>
-            <div className="container-login">
-                <div className="login-container">
-                    <form>
-                        <h2 className="text-center">Edit Content</h2>
-                        <label htmlFor="title" className="form-label">
-                            Title
-                        </label>
-                        <input 
-                            type="text" 
-                            className="form-control input-width"
-                            value={title}
-                            required
-                            placeholder="title"
-                            onChange={(e) => setTitle(e.target.value)} 
-                        />
-                        <label htmlFor="content" className="form-label">
-                            Content
-                        </label>
-                        <textarea  
-                            className="form-control input-width"
-                            value={content}
-                            required
-                            placeholder="content"
-                            onChange={(e) => setContent(e.target.value)}
-                            />
-                        <label htmlFor="img" className="form-label">Img</label>
-                        <div
-                            ref={wrapperRef}
-                            className="drop-file-input"
-                            onDragEnter={onDragEnter}
-                            onDragLeave={onDragLeave}
-                            onDrop={onDrop}
-                        >
-                        <div className="drop-file-input__label">
-                            <img src="/upload.jpg" alt="WHERE IS IMG" className="img-upload" />
-                            <p>Drag & Drop img here</p>
-                        </div>
-                        <input
-                            type="file"
-                            placeholder="IMG"
-                            required
-                            className="form-control input-width"
-                            onChange={onFileDrop}
-                        />
+          let requestData: any = {
+            title: title,
+            content: content,
+            id: id,
+          };
+    
+          if (file) {
+            const base64Data = await new Promise<string>((resolve, reject) => {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => {
+                const base64Url = reader.result as string;
+                resolve(base64Url.split(",")[1]);
+              };
+              reader.onerror = (error) => reject(error);
+            });
+            requestData.img = base64Data;
+          }
+    
+          const response = await axios.put("http://localhost/Server/Content.php", requestData, {
+            headers :{
+                'Content-Type': 'application/json',
+            }
+          });
+          console.log(response.data);
+          if (response.data.status === 200) {
+            Swal.fire({
+              icon: "success",
+              text: response.data.message,
+            }).then(() => {
+              window.location.href = "/managecontent";
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              text: response.data.message,
+            });
+          }
+        } catch (error) {
+          console.error("Error during submission", error);
+          Swal.fire({
+            icon: "error",
+            text: "An error occurred during submission",
+          });
+        }
+      };
+  
+    const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        const file = files[0];
+        const fileName = file.name.toLowerCase();
+        if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
+          setFile(file);
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: "Only PNG, JPG, and JPEG files are allowed.",
+          });
+          e.target.value = "";
+        }
+      }
+    };
+  
+    return (
+      <AddSlidestyle>
+        <div className="container-login">
+          <div className="login-container">
+            <form>
+              <h2 className="text-center">Edit Content</h2>
+              <label htmlFor="title" className="form-label">
+                Title
+              </label>
+              <input
+                type="text"
+                className="form-control input-width"
+                value={title}
+                required
+                placeholder="title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <label htmlFor="content" className="form-label">
+                Content
+              </label>
+              <textarea
+                className="form-control input-width"
+                value={content}
+                required
+                placeholder="content"
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <label htmlFor="img" className="form-label">
+                Img
+              </label>
+              <div
+                ref={wrapperRef}
+                className="drop-file-input"
+                onDragEnter={onDragEnter}
+                onDragLeave={onDragLeave}
+                onDrop={onDrop}
+              >
+                <div className="drop-file-input__label">
+                  <img src="/upload.jpg" alt="WHERE IS IMG" className="img-upload" />
+                  <p>Drag & Drop img here</p>
+                </div>
+                <input
+                  type="file"
+                  placeholder="IMG"
+                  required
+                  className="form-control input-width"
+                  onChange={onFileDrop}
+                />
+              </div>
+              {file ? (
+                <div className="drop-file-preview">
+                  <p className="drop-file-preview_title">Ready to upload</p>
+                  <div className="drop-file-preview_item">
+                    <img src="/blank_file.png" alt="" className="img-title" />
+                    <div className="drop-file-preview_item_info">
+                      <p>{file.name}</p>
                     </div>
-                    {file ? (
-                        <div className="drop-file-preview">
-                            <p className="drop-file-preview_title">
-                                Ready to upload
-                            </p>
-                            <div className="drop-file-preview_item">
-                                <img src="/blank_file.png" alt="" className="img-title"/>
-                                <div className="drop-file-preview_item_info">
-                                    <p>{file.name}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ):(
-                        <p>wait for upload</p>
-                    )}
-                    <button
-                        type="button"
-                        className="btn btn-primary float-end"
-                        onClick={handleSubmit}
-                    >
-                        Submit
-                    </button>
-                </form>
-            </div>
+                  </div>
+                </div>
+              ) : (
+                <p>wait for upload</p>
+              )}
+              <button
+                type="button"
+                className="btn btn-primary float-end"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
-    </AddSlidestyle>
-    )
-}
-
-export default EditContent;
+      </AddSlidestyle>
+    );
+  };
+  
+  export default EditContent;

@@ -106,7 +106,7 @@ const Slide_manage = styled.div`
         text-align: center;
         margin-bottom: 20px;
         position: absolute;
-        top: 15%;
+        top: 13%;
         background-color: #CCBEBE;
         //border: 2px solid #000;
         border-radius: 5px;
@@ -115,6 +115,21 @@ const Slide_manage = styled.div`
     p{
         margin: 2% 0 0 0;
     }
+    
+    .cell{
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .cell-content{
+        text-align: center;
+        height : 90px;
+        overflow-y: auto;
+    }
+
     .img-table{
         width: 120px;
         height: 100px;
@@ -130,6 +145,17 @@ const Slide_manage = styled.div`
         .img-table{
             width: 90px;
             height: 90px;
+        }
+    }
+    @media screen and (max-width: 768px){
+        .text-con{
+            width: 120px;
+        }
+        .text-title{
+            font-size: 20px;
+        }
+        .jGKeEe{
+            overflow-x: auto;
         }
     }
 `;
@@ -179,16 +205,13 @@ const ManageContent : React.FC = () =>{
         }
     }
     const handleAdd = () =>{
-        console.log("Adding....");
         window.location.href = "/managecontent/add";
     }
     const handleEdit = ( id : number) =>{
-        console.log("Editing...." + id);
         window.location.href = `/managecontent/edit/${id}`
     }
 
     const handleDelete = async( id : number) =>{
-        console.log("Deleting..." + id);
         try {
             const result = await Swal.fire({
                 title: 'Are you sure?',
@@ -208,10 +231,10 @@ const ManageContent : React.FC = () =>{
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ id }),
+                        body: JSON.stringify({ id:id }),
                     });
                     const responseData = await response.json()
-                    if (responseData.data.status === 200) {
+                    if (responseData.status === 200) {
                         await Swal.fire(
                             'Deleted!',
                             'Your data has been deleted.',
@@ -254,7 +277,7 @@ const ManageContent : React.FC = () =>{
             <div className="cell"><Link to = {"http://localhost/Server/"+row.img}><img src={"http://localhost/Server/"+row.img} className="img-table" /></Link></div>
         },
         {name: 'Content', selector: (row: tabledata) => row.content, sortable: false, cell: (row : tabledata) =>
-            <div className="cell">{row.content}</div>
+            <div className="cell-content">{row.content}</div>
         },
         {
             name: 'Edit',

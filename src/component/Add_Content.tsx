@@ -137,7 +137,7 @@ const AddContent : React.FC = () =>{
                         icon: "success",
                         text: responseData.message,
                     }).then(() => {
-                        window.location.href = "/manageslideshow";
+                        window.location.href = "/managecontent";
                     });                    
                 } else {
                     Swal.fire({

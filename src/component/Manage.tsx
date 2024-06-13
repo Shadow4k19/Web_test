@@ -109,7 +109,6 @@ const ManageStyle = styled.div`
     .manage-user-container{
         padding: 10% 5% 5% 5%;
     }
-
   } 
   @media screen and (max-width: 600px){
     .manage-user-container{
@@ -117,7 +116,6 @@ const ManageStyle = styled.div`
       padding: 17%;
     }
   }
-}
 `;
 const Manage : React.FC = () =>{
 

@@ -209,17 +209,17 @@ const HomeCon = styled.div`
   }
 
   .block-s{
-    animation: appear-s 2s ease-in-out;
+    animation: appear-s 1s ease-in-out;
 
   }
   .block-middle {
-    animation: appear-mid 2s ease-in-out;
+    animation: appear-mid 1s ease-in-out;
   }
   .block-middle-r{
-    animation: appear-r 2s ease-in-out;
+    animation: appear-r 1s ease-in-out;
   }
   .block-b{
-    animation: appear-b 2s ease-in-out;
+    animation: appear-b 1s ease-in-out;
   }
   
 

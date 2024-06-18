@@ -51,8 +51,7 @@ const Register : React.FC = () =>{
                 March: March,
                 April: April,
               }
-              const response = await axios.post("http://localhost/Server/Register.php" , data);
-              console.log(response);
+              const response = await axios.post("http://localhost/Server/register.php"||"http://localhost:8080/authapi/register" , data);
               if(response.data.status === 201){
                 Swal.fire({
                   icon: "success",
@@ -68,6 +67,11 @@ const Register : React.FC = () =>{
                       })
                   }
               })
+            }else{
+              Swal.fire({
+                icon : "error",
+                title : response.data.message,
+              });
             }
           }
           RegisterData();

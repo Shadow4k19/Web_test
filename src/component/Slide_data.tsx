@@ -23,16 +23,17 @@ const SlideData: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost/Server/Slideshow.php", {
+      const response = await fetch("http://localhost/Server/Slideshow.php"||"http://localhost:8080/slideshowapi/slideshows", {
         method: 'GET',
       });
       const responseData = await response.json();
+      console.log(responseData);
       if (responseData.status === 200) {
         const updatedData = responseData.data.map((slide: Slide) => ({
           ...slide,
-          url: slide.url.startsWith('http://localhost/Server/')
+          url: slide.url.startsWith('http://localhost/Server/')//Express use http://localhost:PORT/Folder_NAME/
             ? slide.url
-            : `http://localhost/Server/${slide.url}`,
+            : `http://localhost/Server/${slide.url}`,//Express use http://localhost:PORT/Folder_NAME/
         }));
         setData(updatedData);
       } else {

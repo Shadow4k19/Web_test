@@ -76,7 +76,7 @@ const Edit_user : React.FC = () => {
             if (combinedData) {
                 const response = await axios({
                     method: 'put',
-                    url: 'http://localhost/Server/User.php',
+                    url: 'http://localhost/Server/User.php' || 'http://localhost:8080/userapi/user',
                     data: combinedData,
                   });
                 if (response.data.status === 200) {
@@ -102,7 +102,7 @@ const Edit_user : React.FC = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get<{ data: { user: User[]; dashboard: Dashboard[] } }>(`http://localhost/Server/User.php?username=${username}`);
+            const response = await axios.get<{ data: { user: User[]; dashboard: Dashboard[] } }>(`http://localhost/Server/User.php?username=${username}` || `http://localhost:8080/userapi/user/${username}`);
             if (response) {
                 const { user = [], dashboard = [] } = response.data.data || {};
                 const combinedMap: { [key: string]: combinedData } = {};

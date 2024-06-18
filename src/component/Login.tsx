@@ -36,7 +36,7 @@ const Login : React.FC =()=>{
             password: pass,
           };
           const Senddata = async() =>{
-            const response = await axios.post('http://localhost/Server/Login.php', data, {
+            const response = await axios.post('http://localhost/Server/Login.php'||'http://localhost:8080/authapi/login', data, {
               headers: {
                   'Content-Type': 'application/json'
               }

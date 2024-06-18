@@ -208,7 +208,7 @@ const UserComponent: React.FC = () => {
                 const deleted_data = async() =>{
                     const response = await axios({
                         method: 'delete',
-                        url: 'http://localhost/Server/User.php',
+                        url: 'http://localhost/Server/User.php' || 'http://localhost:8080/userapi/user',
                         data: {
                             id: id
                         },
@@ -244,7 +244,7 @@ const UserComponent: React.FC = () => {
     }
     const fetchData = async () => {
         try {
-            const response = await axios.get<{ data: { user: User[]; dashboard: Dashboard[] } }>("http://localhost/Server/User.php");
+            const response = await axios.get<{ data: { user: User[]; dashboard: Dashboard[] } }>("http://localhost/Server/User.php" || 'http://localhost:8080/userapi/user');
             const { user = [] , dashboard = [] } = response.data.data || {};
             const combinedMap: { [key: string]: combinedData } = {};
 

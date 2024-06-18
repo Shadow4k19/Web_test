@@ -181,7 +181,7 @@ const ManageSlideshow : React.FC = () =>{
     },[])
     const fetchdata = async() =>{
         try{
-            const responsedata = await axios.get("http://localhost/Server/Slideshow.php");
+            const responsedata = await axios.get("http://localhost/Server/Slideshow.php" || "http://localhost:8080/slideshowapi/slideshows");
             if(responsedata){
                 setData(responsedata.data.data);
                 setLoading(false)
@@ -219,7 +219,7 @@ const ManageSlideshow : React.FC = () =>{
     
             if (result.isConfirmed) {
                 try {
-                    const response = await axios.delete('http://localhost/Server/Slideshow.php', {
+                    const response = await axios.delete("http://localhost/Server/Slideshow.php" ||'http://localhost:8080/slideshowapi/slideshows', {
                         data: { id: id },
                     });
                     console.log(response);

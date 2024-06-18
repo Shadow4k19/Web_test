@@ -116,7 +116,7 @@ const EditSlide : React.FC = () =>{
         console.log(idx);
     },[idx])
     const fetchdata = async() =>{
-        const response = await axios.get(`http://localhost/Server/Slideshow.php?id=${id}`);
+        const response = await axios.get(`http://localhost/Server/Slideshow.php?id=${id}` || `http://localhost:8080/slideshowapi/slideshows/${id}`);
         console.log(response.data);
         if(response.data.status === 200){
             setIdx(response.data.data[0].id);
@@ -150,7 +150,7 @@ const EditSlide : React.FC = () =>{
                             id: idx,
                             url: base64Data,
                         };
-                        const response = await axios.put("http://localhost/Server/Slideshow.php", requestData, {
+                        const response = await axios.put("http://localhost/Server/Slideshow.php"||"http://localhost:8080/slideshowapi/slideshows", requestData, {
                             headers: {
                                 'Content-Type': 'application/json'
                             }

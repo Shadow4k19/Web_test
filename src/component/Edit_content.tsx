@@ -114,7 +114,7 @@ const EditContent = () => {
   
     const fetchdata = async () => {
       try {
-        const response = await axios.get(`http://localhost/Server/Content.php?id=${id}`);
+        const response = await axios.get(`http://localhost/Server/Content.php?id=${id}` || `http://localhost:8080/contentapi/content/${id}`);
         if (response.data.status === 200) {
           setContent(response.data.data[0].content);
           setTitle(response.data.data[0].title);
@@ -170,7 +170,7 @@ const EditContent = () => {
             requestData.img = base64Data;
           }
     
-          const response = await axios.put("http://localhost/Server/Content.php", requestData, {
+          const response = await axios.put("http://localhost/Server/Content.php"||"http://localhost:8080/contentapi/content", requestData, {
             headers :{
                 'Content-Type': 'application/json',
             }

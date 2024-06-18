@@ -56,7 +56,7 @@ const Add_user : React.FC = () => {
         e.preventDefault();
         try {
             if(combinedData){
-                const response = await axios.post("http://localhost/Server/User.php", combinedData);
+                const response = await axios.post("http://localhost/Server/User.php"||"http://localhost:8080/userapi/user", combinedData);
                 console.log(response.data);
                 if (response.data.status === 201) {
                     Swal.fire({
@@ -70,7 +70,7 @@ const Add_user : React.FC = () => {
                 } else {
                     Swal.fire({
                         icon: "error",
-                        title: "Add Failed",
+                        title: response.data.message,
                     })
                 }
             }

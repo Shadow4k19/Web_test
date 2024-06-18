@@ -192,7 +192,7 @@ const ManageContent : React.FC = () =>{
 
     const fetchdata = async() =>{
         try{
-            const response = await axios.get("http://localhost/Server/Content.php");
+            const response = await axios.get("http://localhost/Server/Content.php" || "http://localhost:8080/contentapi/content");
             console.log(response.data);
             if(response){
                 setData(response.data.data);
@@ -226,7 +226,7 @@ const ManageContent : React.FC = () =>{
             
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch('http://localhost/Server/Content.php', {
+                    const response = await fetch("http://localhost/Server/Content.php" ||'http://localhost:8080/contentapi/content', {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',

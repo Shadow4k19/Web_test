@@ -126,7 +126,7 @@ const AddContent : React.FC = () =>{
                 formdata.append('img', file);
                 formdata.append('title', title);
                 formdata.append('content', content);
-                const response = await fetch("http://localhost/Server/Content.php",{
+                const response = await fetch("http://localhost/Server/Content.php" || "http://localhost:8080/contentapi/content",{
                     method: 'POST',
                     body: formdata
                 });

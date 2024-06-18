@@ -102,7 +102,7 @@ const AddSlide: React.FC = () => {
                 const formData = new FormData();
                 formData.append('url', file);
     
-                const response = await axios.post("http://localhost/Server/Slideshow.php", formData, {
+                const response = await axios.post("http://localhost/Server/Slideshow.php " || "http://localhost:8080/slideshowapi/slideshows", formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

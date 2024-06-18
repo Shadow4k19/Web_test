@@ -46,16 +46,16 @@ const Carddata : React.FC = () =>{
 
     const fetchdata = async() => {
         try{
-            const response = await fetch("http://localhost/Server/Content.php",{
+            const response = await fetch("http://localhost/Server/Content.php"||"http://localhost:8080/contentapi/content",{
                 method : 'GET',
             });
             const responseData = await response.json();
             if(responseData.status === 200){
                 const updateData = responseData.data.map((content: data) =>({
                     ...content,
-                    img: content.img.startsWith('http://localhost/Server/')
+                    img: content.img.startsWith('http://localhost/Server/')//Express use http://localhost:PORT/Folder_NAME/
                         ? content.img
-                        :`http://localhost/Server/${content.img}`,
+                        :`http://localhost/Server/${content.img}`,//Express use http://localhost:PORT/Folder_NAME/
                 }));
                 setData(updateData);
             }else{

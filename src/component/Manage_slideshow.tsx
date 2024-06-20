@@ -13,7 +13,7 @@ interface tabledata{
 }
 
 interface Style {
-    load : boolean;
+    load : string;
 }
 
 const Slide_manage = styled.div<Style>`
@@ -28,7 +28,7 @@ const Slide_manage = styled.div<Style>`
         border-radius: 5px;
         //width: 50%;
         //border: 2px solid #000;
-        height : ${({ load }) => (load ? '30rem' : 'auto')};
+        height : ${({ load }) => (load ==='true' ? '30rem' : 'auto')};
         align-content: center;  
     }
     h1{
@@ -205,7 +205,7 @@ const ManageSlideshow : React.FC = () =>{
           return item.id.toString().includes(search);
         });
         setFilteredata(result);
-      }, [search, filterdata]);
+      }, [search]);
 
     const fetchdata = async() =>{
         try{
@@ -298,7 +298,7 @@ const ManageSlideshow : React.FC = () =>{
         },
     ]
     return(
-        <Slide_manage load = {loading} >
+        <Slide_manage load = {loading.toString()} >
             <div className="section">
                 <div className="container">
                     <div className="inside-con">

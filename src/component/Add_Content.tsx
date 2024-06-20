@@ -103,6 +103,9 @@ const AddContent : React.FC = () =>{
     const [file, setFile] = useState<File | null>(null);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [content2, setContent2] = useState("");
+    const [content3, setContent3] = useState("");
+    const [content4, setContent4] = useState("");
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -120,11 +123,14 @@ const AddContent : React.FC = () =>{
 
     const handleSubmit = async() => {
         try{
-            if(file && title && content){
+            if(file && title && content && content2 && content3 && content4){
                 const formdata = new FormData();
                 formdata.append('img', file);
                 formdata.append('title', title);
                 formdata.append('content', content);
+                formdata.append('content2', content2);
+                formdata.append('content3', content3);
+                formdata.append('content4', content4);
                 const response = await fetch("http://localhost:8080/contentapi/content",{
                     method: 'POST',
                     body: formdata
@@ -209,6 +215,36 @@ const AddContent : React.FC = () =>{
                             required
                             placeholder="content"
                             onChange={(e) => setContent(e.target.value)}
+                            />
+                        <label htmlFor="content2" className="form-label">
+                            Content2
+                        </label>
+                        <textarea  
+                            className="form-control input-width"
+                            value={content2}
+                            required
+                            placeholder="content2"
+                            onChange={(e) => setContent2(e.target.value)}
+                            />
+                        <label htmlFor="content3" className="form-label">
+                            Content3
+                        </label>
+                        <textarea  
+                            className="form-control input-width"
+                            value={content3}
+                            required
+                            placeholder="content3"
+                            onChange={(e) => setContent3(e.target.value)}
+                            />
+                        <label htmlFor="content4" className="form-label">
+                            Content4
+                        </label>
+                        <textarea  
+                            className="form-control input-width"
+                            value={content4}
+                            required
+                            placeholder="content4"
+                            onChange={(e) => setContent4(e.target.value)}
                             />
                         <label htmlFor="img" className="form-label">Img</label>
                         <div

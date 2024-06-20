@@ -26,6 +26,7 @@ import EditSlide from './component/Edit_Slide';
 import AddContent from './component/Add_Content';
 import EditContent from './component/Edit_content';
 import NewsPage from './component/News_page';
+import NewsPage_Default1 from './component/News_page_Default';
 
 
 interface Props{
@@ -61,6 +62,7 @@ const App: React.FC<Props> = ({currentpath}: any) => {
           <Route path='/News/MineSweeper' element = {<MineSwiper />} />
           <Route path='/News/Breakout' element = {<Breakout />} />
           <Route path='/News/Tetris' element = {<Tetris />} />
+          <Route path='/News/Default1' element = {<NewsPage_Default1/>} />
           <Route path='/News/:id' element = {<NewsPage />} />
           {loginstatus ? (
             <>

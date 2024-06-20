@@ -49,11 +49,23 @@ const TetrisStyle = styled.div`
     color: #000;
   }
 
+  .guide-con{
+    display : flex;
+    justify-content: center;
+    margin : 0 0 20px;
+  }
+
+  .inside-guidecon{
+    background-color : #fff;
+    color : #000;
+    padding : 10px;
+    border : 1px solid #000;
+    border-radius : 20px;
+  }
   @media screen and (max-width: 768px){
     .container{
       padding: 15% 0 0 0; 
-    }
-    
+    }  
     .modal{
       height : 130px;
     }
@@ -62,7 +74,6 @@ const TetrisStyle = styled.div`
 
 const Tetris : React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [guide, setGuide] = useState(true);
     const [endgame, setEndgame] = useState(false);
     const createMatrix = (w: number, h: number) => {
       const matrix = [];
@@ -319,13 +330,13 @@ const Tetris : React.FC = () => {
     <TetrisStyle>
       <div className="container">
         <div id="score"></div>
-        <canvas ref={canvasRef} id="tetris" width = "240" height = "400"></canvas>
-        {guide && (
-        <div className="modal">
-          <h2>use J,K,L to move use Q,W to rotate</h2>
-            <button className="btn btn-danger" onClick={() => setGuide(false)}>Ok</button>
+        <div className="guide-con">
+            <div className="inside-guidecon">
+              <h2>!GUIDE!</h2>
+              <h4>use J,K,L to move use Q,W to rotate</h4>
+            </div>
         </div>
-      )}
+        <canvas ref={canvasRef} id="tetris" width = "240" height = "400"></canvas>
       {endgame && (
         <div className="modal">
           <h2>endgame Score: </h2>

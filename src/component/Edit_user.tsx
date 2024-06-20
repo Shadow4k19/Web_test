@@ -184,7 +184,8 @@ const Edit_user : React.FC = () => {
                         <label>
                             <input
                                 type="radio"
-                                value="Admin"
+                                value="admin"
+                                className="form-check-input"
                                 checked={combinedData.role === 'admin'}
                                 onChange={(e) => setCombinedData({...combinedData, role: e.target.value})}
                             />
@@ -193,7 +194,8 @@ const Edit_user : React.FC = () => {
                         <label>
                             <input
                                 type="radio"
-                                value="User"
+                                value="user"
+                                className="form-check-input"
                                 checked={combinedData.role === 'user'}
                                 onChange={(e) => setCombinedData({...combinedData, role: e.target.value})}
                             />

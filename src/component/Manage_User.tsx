@@ -38,7 +38,7 @@ const User_manage = styled.div<Style>`
         color: #fff;
         background-color: #CCBEBE;
         border-radius: 5px;
-        height : ${({ load }) => (load ? '30rem' : 'auto')};
+        height : ${({ load }) => (load ==='true' ? '30rem' : 'auto')};
          align-content: center;  
     }
     h1{
@@ -194,7 +194,7 @@ interface combinedData{
 }
 
 interface Style {
-    load : boolean;
+    load : string;
 }
 const UserComponent: React.FC = () => {
     const [search , setSerch] = useState('');
@@ -208,6 +208,23 @@ const UserComponent: React.FC = () => {
     useEffect(() => {
         fetchData();    
     }, []);
+    const caseInsensitiveSort = (rowA : any, rowB : any) => {
+        console.log(typeof(rowA.id));
+        //console.log(rowA);
+        let a, b;
+            a = Number(rowA.id);
+            b = Number(rowB.id);
+        if (a > b) {
+            return 1;
+        }
+        
+        if (b > a) {
+            return -1;
+        }
+        
+        return 0;
+    };    
+    
 
     const handleEdit = (username : string) =>{
         window.location.href = `/edituser/${username}`
@@ -299,7 +316,6 @@ const UserComponent: React.FC = () => {
             });
             
             const combinedDataArray = Object.values(combinedMap);
-            
             setCombinedData(combinedDataArray);
             setFilteredData(combinedDataArray);
             setLoading(false);
@@ -315,7 +331,7 @@ const UserComponent: React.FC = () => {
       }, [search, combinedData]);
       
     const columns: TableColumn<combinedData>[] = [
-        { name: 'ID', selector: (row: combinedData) => row.id, sortable: true ,cell: (row : combinedData) =>
+        { name: 'ID', selector: (row: combinedData) => row.id, sortable: true , sortFunction: caseInsensitiveSort,cell: (row : combinedData) =>
             <div className="cell">{row.id}</div>
         },
         { name: 'Username', selector: (row: combinedData) => row.username,cell: (row : combinedData) =>
@@ -349,7 +365,7 @@ const UserComponent: React.FC = () => {
     ];
 
     return (
-        <User_manage load = { loading } >
+        <User_manage load = { loading.toString() } >
             <div className="section">
                 <div className="container">
                     <div className="inside-con">

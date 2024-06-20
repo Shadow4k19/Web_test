@@ -2,6 +2,7 @@ import styled from "styled-components";
 import SlideData from "./Slide_data";
 import Carddata from "./CardData";
 import Footer from "./footer";
+import Digital_Clock from "./Digital_Clock";
 
 const HomeCon = styled.div`
   .container-home {
@@ -109,6 +110,7 @@ const HomeCon = styled.div`
   .card-con {
     display: flex;
     align-items: flex-start;
+    justify-content: space-around;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -157,6 +159,7 @@ const HomeCon = styled.div`
   .contact-us-con {
     display: flex;
     justify-content: center;
+    justify-content: space-around
     width: 100%;
   }
 
@@ -297,7 +300,7 @@ const Home = () => {
         </div>
         <div id="contact" className="contact-us-con section2 block block-middle-r">
           <div className="card-con">
-            <div className="content-container">
+            {/*<div className="content-container">
               <div className="text-con">
                 <h1 className="title">
                   <u>Contact us</u>
@@ -315,7 +318,8 @@ const Home = () => {
                 alt=""
                 style={{ borderRadius: "5px", width: "250px", height: "300px" }}
               />
-            </div>
+            </div>*/}
+            <Digital_Clock />
           </div>
         </div>
         <div id="content" className="card-container section block block-b">

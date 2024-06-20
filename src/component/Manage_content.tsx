@@ -11,9 +11,12 @@ interface tabledata {
     img : string;
     title : string;
     content : string;
+    content2 : string;
+    content3 : string;
+    content4 : string;
 }
 interface style{
-    load : boolean;
+    load : string;
 }
 
 const Slide_manage = styled.div<style>`
@@ -28,7 +31,7 @@ const Slide_manage = styled.div<style>`
         border-radius: 5px;
         //width: 50%;
         //border: 2px solid #000;
-        height : ${({ load }) => (load ? '30rem' : 'auto')};
+        height :${({ load }) => (load ==='true' ? '30rem' : 'auto')};
         align-content: center;  
     }
     h1{
@@ -56,9 +59,6 @@ const Slide_manage = styled.div<style>`
       
     .btn-con{
         justify-content: space-between;
-    }
-    .rdt_TableCell{
-        overflow : auto;
     }
     button{
         margin: 1.1px;
@@ -123,7 +123,6 @@ const Slide_manage = styled.div<style>`
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: auto;
     }
 
     .cell-content{
@@ -149,6 +148,10 @@ const Slide_manage = styled.div<style>`
 
     .dbBgUh:disabled{
         fill : rgb(0 0 0 / 48%);
+    }
+
+    .cell-title{
+        oveflow-y: auto;
     }
 
     @media screen and (max-width:1200px){
@@ -212,7 +215,7 @@ const ManageContent : React.FC = () =>{
           return item.title.toString().toLowerCase().includes(search.toLowerCase());
         });
         setFilteredata(result);
-    }, [search, filterdata]);
+    }, [search]);
 
     const fetchdata = async() =>{
         try{
@@ -295,7 +298,7 @@ const ManageContent : React.FC = () =>{
             <div className="cell-id">{row.id}</div>
         },
         {name: 'Title', selector: (row: tabledata) => row.title, sortable: false, cell: (row : tabledata) =>
-            <div className="cell">{row.title}</div>
+            <div className="cell-title">{row.title}</div>
         },
         {name: 'Img', selector: (row: tabledata) => row.img, sortable: false, cell: (row : tabledata) =>
             <div className="cell"><Link to = {"http://localhost/Server/"+row.img}><img src={"http://localhost/Server/"+row.img} className="img-table" /></Link></div>
@@ -303,25 +306,28 @@ const ManageContent : React.FC = () =>{
         {name: 'Content', selector: (row: tabledata) => row.content, sortable: false, cell: (row : tabledata) =>
             <div className="cell-content">{row.content}</div>
         },
+        {name: 'Content', selector: (row: tabledata) => row.content, sortable: false, cell: (row : tabledata) =>
+            <div className="cell-content">{row.content2}</div>
+        },
+        {name: 'Content', selector: (row: tabledata) => row.content, sortable: false, cell: (row : tabledata) =>
+            <div className="cell-content">{row.content3}</div>
+        },
+        {name: 'Content', selector: (row: tabledata) => row.content, sortable: false, cell: (row : tabledata) =>
+            <div className="cell-content">{row.content4}</div>
+        },
         {
             name: 'Edit',
             cell: (row: any) => (
                 <div className="btn-con-table">
                     <button className="btn btn-success action-btn" onClick={() => handleEdit(row.id)}>Edit</button>
-                </div>
-            ),
-        },
-        {
-            name: 'Delete',
-            cell: (row: any) =>(
-                <div className="btn-con-table">
                     <button className="btn btn-danger action-btn" onClick={() => handleDelete(row.id)}>Delete</button>
                 </div>
-            )
+                
+            ),
         },
     ]
     return(
-        <Slide_manage load={loading}>
+        <Slide_manage load={loading.toString()}>
             <div className="section">
                 <div className="container">
                     <div className="inside-con">

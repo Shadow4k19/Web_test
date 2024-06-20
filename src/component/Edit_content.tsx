@@ -107,6 +107,9 @@ const EditContent = () => {
     const [file, setFile] = useState<File | null>(null);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [content2, setContent2] = useState("");
+    const [content3, setContent3] = useState("");
+    const [content4, setContent4] = useState("");
   
     useEffect(() => {
       fetchdata();
@@ -117,6 +120,9 @@ const EditContent = () => {
         const response = await axios.get(`http://localhost/Server/Content.php?id=${id}` || `http://localhost:8080/contentapi/content/${id}`);
         if (response.data.status === 200) {
           setContent(response.data.data[0].content);
+          setContent2(response.data.data[0].content2);
+          setContent3(response.data.data[0].content3);
+          setContent4(response.data.data[0].content4);
           setTitle(response.data.data[0].title);
         } else {
           console.error("Error fetching data");
@@ -142,7 +148,7 @@ const EditContent = () => {
   
     const handleSubmit = async () => {
         try {
-          if (!title || !content) {
+          if (!title || !content || !content2 || !content3 || !content4) {
             Swal.fire({
               icon: "warning",
               text: "Title and content are required",
@@ -153,6 +159,9 @@ const EditContent = () => {
           let requestData: any = {
             title: title,
             content: content,
+            content2 : content2,
+            content3 : content3,
+            content4 : content4,
             id: id,
           };
     
@@ -249,6 +258,36 @@ const EditContent = () => {
                 required
                 placeholder="content"
                 onChange={(e) => setContent(e.target.value)}
+              />
+              <label htmlFor="content2" className="form-label">
+                  Content2
+              </label>
+              <textarea  
+                className="form-control input-width"
+                value={content2}
+                required
+                placeholder="content2"
+                onChange={(e) => setContent2(e.target.value)}
+              />
+              <label htmlFor="content3" className="form-label">
+                Content3
+              </label>
+              <textarea  
+                className="form-control input-width"
+                value={content3}
+                required
+                placeholder="content3"
+                onChange={(e) => setContent3(e.target.value)}
+              />
+              <label htmlFor="content4" className="form-label">
+                Content4
+              </label>
+              <textarea  
+                className="form-control input-width"
+                value={content4}
+                required
+                placeholder="content4"
+                onChange={(e) => setContent4(e.target.value)}
               />
               <label htmlFor="img" className="form-label">
                 Img

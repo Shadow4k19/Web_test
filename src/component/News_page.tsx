@@ -6,45 +6,72 @@ interface Content {
     id: number;
     title: string;
     content: string;
+    content2: string;
+    content3: string;
+    content4: string;
     img: string;
 }
 
 
 const NewsStyle = styled.div`
-    .section{
+    .section {
         min-height: 100vh;
         height: auto;
+        padding: 20px;
+        background-color: #f5f5f5;
     }
-    .container{
+    .container {
         width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
         overflow: hidden;
-        background-color: #C3BCBC;
+        background-color: #ffffff;
         border-radius: 20px;
-        color: #000;
-        margin: 70px 0 0 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333;
+        margin-top: 70px;
     }
-    .img-con img{
-        width: 32rem;
-        border-radius: 20px;
-    }
-    .inside-con{
-        margin: 20px 0 0 0;
-    }
-
-    .title-con, content-con{
-        margin: 20px 20px 0 20px;
-    }
-    
-    .content-con{
+    .img-con img {
         width: 100%;
+        border-radius: 20px;
     }
-    h6{
+    .inside-con {
+        margin-top: 20px;
+    }
+    .title-con {
+        margin: 20px;
+    }
+    h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+        color: #444;
+        text-align: center;
+    }
+    .content-con {
+        margin: 20px;
+        width: auto;
+    }
+    h6 {
         font-size: 16px;
         font-weight: 400;
-        line-height: 2.25;
+        line-height: 1.75;
         word-break: break-word;
         letter-spacing: 0.25px;
         text-align: left;
+    }
+    p {
+        text-indent: 4rem;
+        line-height: 1.75;
+        margin-bottom: 1.5rem;
+        font-size: 16px;
+        text-align: justify;
+    }
+    @media screen and (max-width : 768px){
+        p {
+            text-align : center;
+        }
     }
 `;
 
@@ -95,7 +122,10 @@ const NewsPage: React.FC = () => {
                                             <h2>{data.title}</h2>
                                         </div>
                                         <div className="content-con">
-                                            <h6>{"\t"+data.content}</h6>
+                                            <p>{data.content}</p>
+                                            <p>{data.content2}</p>
+                                            <p>{data.content3}</p>
+                                            <p>{data.content4}</p>
                                         </div>
                                     </div>
                                 </>

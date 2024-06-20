@@ -5,7 +5,6 @@ const SortingStyle = styled.div`
 .section{
     height: auto;
     min-height: 100vh;
-    padding: 15% 0 0 0;
 }
 
 .container {

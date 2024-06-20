@@ -30,12 +30,7 @@ const CarddataDefault : data[]= [
         title : "Tetris",
         content : "Tetris GAME",
         img : "https://play-lh.googleusercontent.com/ILMYT7PYDpF1771O6lixyX01a3JEGYKotMshaq6rFFxQnZPGb_byVbfgMZRJlG4pITJPfqoUC0g=w1296-h2160-rw",
-    },{
-        id : "NotFound",
-        title : "Card",
-        content : "Don't Have",
-        img : "https://i0.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?fit=845%2C503&ssl=1",
-    }
+    },
 ]
 const Carddata : React.FC = () =>{
     const [data, setData] = useState<data[]>(CarddataDefault);

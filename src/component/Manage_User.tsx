@@ -28,7 +28,7 @@ createTheme('solarized', {
     },
   }, 'dark');
 
-const User_manage = styled.div`
+const User_manage = styled.div<Style>`
     .section{
         min-height: 100vh;
         height: auto;
@@ -38,7 +38,8 @@ const User_manage = styled.div`
         color: #fff;
         background-color: #CCBEBE;
         border-radius: 5px;
-        //border: 2px solid #000;
+        height : ${({ load }) => (load ? '30rem' : 'auto')};
+         align-content: center;  
     }
     h1{
         color: #000;
@@ -93,7 +94,7 @@ const User_manage = styled.div`
         padding-left: 0px;
     }
     .jOVtgV{
-        padding-left: 0px;
+        padding-left: 20px;
     }
     .input{
         display: flex;
@@ -121,7 +122,7 @@ const User_manage = styled.div`
         text-align: center;
         margin-bottom: 20px;
         position: absolute;
-        top: 70px;
+        top: 13%;
         background-color: #CCBEBE;
         //border: 2px solid #000;
         border-radius: 5px;
@@ -130,9 +131,24 @@ const User_manage = styled.div`
     p{
         margin: 2% 0 0 0;
     }
+    .jfRBrS{
+        background-color :  #CCBEBE;
+    }
+
+    .dbBgUh:disabled{
+        fill : rgb(0 0 0 / 48%);
+    }
+
+    .dKkhXP{
+        overflow : auto;
+    }
+    
     @media screen and (max-width:1200px){
         .btn-success, .btn-danger{
             width: 80px;
+        }
+        .text-con{
+            top: ${({ load }) => (load ? '15%' : '5%')};
         }
     }
     
@@ -145,8 +161,9 @@ const User_manage = styled.div`
             font-size: 20px;
         }
         .jGKeEe{
-            overflow-x: scroll;
+            overflow-x: auto;
         }
+            
 }
 `;
 
@@ -176,6 +193,9 @@ interface combinedData{
     April?: string;
 }
 
+interface Style {
+    load : boolean;
+}
 const UserComponent: React.FC = () => {
     const [search , setSerch] = useState('');
     const [filteredData, setFilteredData] = useState<combinedData[]>([]);
@@ -213,7 +233,6 @@ const UserComponent: React.FC = () => {
                             id: id
                         },
                       });
-                    console.log(response);
                     if(response.data.status === 200){
                         Swal.fire(
                             'Deleted!',
@@ -299,10 +318,10 @@ const UserComponent: React.FC = () => {
         { name: 'ID', selector: (row: combinedData) => row.id, sortable: true ,cell: (row : combinedData) =>
             <div className="cell">{row.id}</div>
         },
-        { name: 'Username', selector: (row: combinedData) => row.username, sortable: true ,cell: (row : combinedData) =>
+        { name: 'Username', selector: (row: combinedData) => row.username,cell: (row : combinedData) =>
             <div className="cell">{row.username}</div>
         },
-        { name: 'Password', selector: (row: combinedData) => row.password || '', sortable: true ,cell: (row : combinedData) =>
+        { name: 'Password', selector: (row: combinedData) => row.password || '',cell: (row : combinedData) =>
             <div className="cell">{row.password}</div>
         },
         { name: 'Role', selector: (row: combinedData) => row.role || '', sortable : true, cell: (row : combinedData) =>
@@ -322,21 +341,15 @@ const UserComponent: React.FC = () => {
             cell: (row: any) => (
                 <div className="btn-con-table">
                     <button className="btn btn-success action-btn" onClick={() => handleEdit(row.username)}>Edit</button>
-                </div>
-            ),
-        },
-        {
-            name: 'Delete',
-            cell: (row: any) =>(
-                <div className="btn-con-table">
                     <button className="btn btn-danger action-btn" onClick={() => handleDelete(row.id)}>Delete</button>
                 </div>
-            )
+                
+            ),
         },
     ];
 
     return (
-        <User_manage>
+        <User_manage load = { loading } >
             <div className="section">
                 <div className="container">
                     <div className="inside-con">

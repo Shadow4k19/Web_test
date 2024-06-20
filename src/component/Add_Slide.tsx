@@ -138,6 +138,17 @@ const AddSlide: React.FC = () => {
         if (files && files.length > 0) {
             const file = files[0];
             const fileName = file.name.toLowerCase();
+            const maxSize = 500000; 
+    
+            if (file.size > maxSize) {
+                Swal.fire({
+                    icon: "error",
+                    text: 'File size exceeds the 500 KB limit.'
+                });
+                e.target.value = '';
+                return;
+            }
+    
             if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
                 setFile(file);
             } else {
@@ -148,7 +159,7 @@ const AddSlide: React.FC = () => {
                 e.target.value = '';
             }
         }
-    };    
+    };
 
     return (
         <AddSlidestyle>

@@ -53,6 +53,10 @@ const TetrisStyle = styled.div`
     .container{
       padding: 15% 0 0 0; 
     }
+    
+    .modal{
+      height : 130px;
+    }
   }
 `;
 

@@ -131,7 +131,6 @@ const MineSwiper : React.FC = () => {
   };
 
   const revealMines = () => {
-    console.log("Lock Game State:", lockGame);
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
           const cell = document.getElementById(`cell-${i}-${j}`);

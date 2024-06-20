@@ -130,7 +130,7 @@ const Manage : React.FC = () =>{
                 </div>
                 <div className="manage-user-container">
                     <div className="card">
-                        <img src="https://i0.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?fit=845%2C503&ssl=1" 
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3z84CDh73AvrjclKR9lX2DnTXNL1hCjkrBg&s" 
                             alt="" />
                         <div className="card-content">
                             <h3>Manage User</h3>
@@ -138,14 +138,16 @@ const Manage : React.FC = () =>{
                         </div>
                     </div>
                     <div className="card">
-                        <img src="https://i0.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?fit=845%2C503&ssl=1" alt="" />
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3z84CDh73AvrjclKR9lX2DnTXNL1hCjkrBg&s" 
+                            alt="" />
                         <div className="card-content">
                             <h3>Manage SlideShow</h3>
                             <a href="/manageslideshow" className="btn">Go page</a>
                         </div>
                     </div>
                     <div className="card">
-                        <img src="https://i0.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?fit=845%2C503&ssl=1" alt="" />
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3z84CDh73AvrjclKR9lX2DnTXNL1hCjkrBg&s" 
+                            alt="" />
                         <div className="card-content">
                             <h3>Manage Content</h3>
                             <a href="/managecontent" className="btn">Go page</a>

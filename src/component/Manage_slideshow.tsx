@@ -11,7 +11,12 @@ interface tabledata{
     id: number;
     url: string; 
 }
-const Slide_manage = styled.div`
+
+interface Style {
+    load : boolean;
+}
+
+const Slide_manage = styled.div<Style>`
     .section{
         min-height: 100vh;
         height: auto;
@@ -23,6 +28,8 @@ const Slide_manage = styled.div`
         border-radius: 5px;
         //width: 50%;
         //border: 2px solid #000;
+        height : ${({ load }) => (load ? '30rem' : 'auto')};
+        align-content: center;  
     }
     h1{
         color: #000;
@@ -131,6 +138,18 @@ const Slide_manage = styled.div`
         border-radius: 20px;
         padding: 15px;
     }
+
+    .cell-id{
+        padding : 0 0 0 30px;
+    }
+
+    .jfRBrS{
+        background-color :  #CCBEBE;
+    }
+
+    .dbBgUh:disabled{
+        fill : rgb(0 0 0 / 48%);
+    }
     @media screen and (max-width:1200px){
         .btn-success, .btn-danger{
             width: 80px;
@@ -172,6 +191,7 @@ createTheme('solarized', {
 const ManageSlideshow : React.FC = () =>{
 
     const [loading , setLoading] = useState(true);
+    const [filterdata, setFilteredata] = useState<tabledata[]>();
     const [search , setSerch] = useState("");
 
     const [data, setData] = useState<tabledata[]>()
@@ -179,15 +199,23 @@ const ManageSlideshow : React.FC = () =>{
     useEffect (() => {
         fetchdata();
     },[])
+
+    useEffect(() => {
+        const result = data?.filter((item) => {
+          return item.id.toString().includes(search);
+        });
+        setFilteredata(result);
+      }, [search, filterdata]);
+
     const fetchdata = async() =>{
         try{
             const responsedata = await axios.get("http://localhost/Server/Slideshow.php" || "http://localhost:8080/slideshowapi/slideshows");
             if(responsedata){
                 setData(responsedata.data.data);
-                setLoading(false)
-                console.log("Data was set");
+                setFilteredata(responsedata.data.data);
+                setLoading(false);
             }else{
-                console.log("Data wasn't set");
+                setLoading(true);
             }
         }catch(error){
             console.log(error);
@@ -195,16 +223,13 @@ const ManageSlideshow : React.FC = () =>{
     } 
 
     const handleAdd = () =>{
-        console.log("Adding....");
         window.location.href = `/manageslideshow/add`;
     }
     const handleEdit = ( id : number) =>{
-        console.log("Editing...." + id);
         window.location.href = `/manageslideshow/edit/${id}`;
     }
 
     const handleDelete = async (id: number) => {
-        console.log("Deleting..." + id);
         try {
             const result = await Swal.fire({
                 title: 'Are you sure?',
@@ -219,10 +244,9 @@ const ManageSlideshow : React.FC = () =>{
     
             if (result.isConfirmed) {
                 try {
-                    const response = await axios.delete("http://localhost/Server/Slideshow.php" ||'http://localhost:8080/slideshowapi/slideshows', {
+                    const response = await axios.delete('http://localhost/Server/Slideshow.php' || 'http://localhost:8080/slideshowapi/slideshows', {
                         data: { id: id },
                     });
-                    console.log(response);
                     if (response.data.status === 200) {
                         await Swal.fire(
                             'Deleted!',
@@ -258,7 +282,7 @@ const ManageSlideshow : React.FC = () =>{
     
     const columns: TableColumn<tabledata>[] = [
         { name: 'ID', selector: (row: tabledata) => row.id, sortable: true, cell: (row : tabledata) =>
-            <div className="cell">{row.id}</div>
+            <div className="cell-id">{row.id}</div>
         },
         {name: 'Img', selector: (row: tabledata) => row.url, sortable: false, cell: (row : tabledata) =>
             <div className="cell"><Link to = {"http://localhost/Server/"+row.url}><img src={`http://localhost/Server/${row.url}`} className="img-table"/></Link></div>
@@ -274,7 +298,7 @@ const ManageSlideshow : React.FC = () =>{
         },
     ]
     return(
-        <Slide_manage>
+        <Slide_manage load = {loading} >
             <div className="section">
                 <div className="container">
                     <div className="inside-con">
@@ -292,7 +316,7 @@ const ManageSlideshow : React.FC = () =>{
                             <>
                             <DataTable
                                 columns={columns}
-                                data={data ?? []}
+                                data={filterdata || []}
                                 pagination
                                 highlightOnHover
                                 theme="solarized"

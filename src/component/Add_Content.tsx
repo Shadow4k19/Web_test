@@ -119,19 +119,17 @@ const AddContent : React.FC = () =>{
     };
 
     const handleSubmit = async() => {
-        console.log("Submitting");
         try{
             if(file && title && content){
                 const formdata = new FormData();
                 formdata.append('img', file);
                 formdata.append('title', title);
                 formdata.append('content', content);
-                const response = await fetch("http://localhost/Server/Content.php" || "http://localhost:8080/contentapi/content",{
+                const response = await fetch("http://localhost:8080/contentapi/content",{
                     method: 'POST',
                     body: formdata
                 });
                 const responseData = await response.json();
-                console.log(responseData);
                 if (responseData.status === 201) {
                     Swal.fire({
                         icon: "success",
@@ -162,6 +160,17 @@ const AddContent : React.FC = () =>{
         if (files && files.length > 0) {
             const file = files[0];
             const fileName = file.name.toLowerCase();
+            const maxSize = 500000; 
+    
+            if (file.size > maxSize) {
+                Swal.fire({
+                    icon: "error",
+                    text: 'File size exceeds the 500 KB limit.'
+                });
+                e.target.value = '';
+                return;
+            }
+    
             if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
                 setFile(file);
             } else {

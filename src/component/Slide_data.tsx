@@ -27,7 +27,6 @@ const SlideData: React.FC = () => {
         method: 'GET',
       });
       const responseData = await response.json();
-      console.log(responseData);
       if (responseData.status === 200) {
         const updatedData = responseData.data.map((slide: Slide) => ({
           ...slide,

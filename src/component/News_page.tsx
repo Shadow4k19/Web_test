@@ -62,17 +62,12 @@ const NewsPage: React.FC = () => {
         console.log(error);
     },[error])
 
-    useEffect (() => {
-        console.log(data);
-    },[data]);
-
     const fetchdata = async () => {
         try {
             const response = await fetch(`http://localhost/Server/Content.php?id=${id}`, {
                 method: 'GET',
             });
             const responseData = await response.json();
-            console.log(responseData);
             if (responseData.status === 200) {
                 setData(responseData.data[0]);
                 setLoading(false);
@@ -100,7 +95,7 @@ const NewsPage: React.FC = () => {
                                             <h2>{data.title}</h2>
                                         </div>
                                         <div className="content-con">
-                                            <h6>{data.content}</h6>
+                                            <h6>{"\t"+data.content}</h6>
                                         </div>
                                     </div>
                                 </>

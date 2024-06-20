@@ -57,6 +57,7 @@ const Ul = styled.ul<StyleProps>`
     width: 300px;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
+    overflow : auto;
     li {
       padding-top: 30px;
       color: #fff;

@@ -22,7 +22,7 @@ const Navbar : React.FC = () =>{
         <div className="background">
             <Nav>
                 <div className="logo">
-                    Web
+                    News
                 </div>
                 <Burger />
             </Nav>

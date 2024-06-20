@@ -100,11 +100,14 @@ const Slidestyle = styled.div`
     justify-content: center;
     width: 40px;
     height: 90px;
+    background-color: rgba(0, 0, 0, 0.001);
+    opacity : 0.001;
   }
   
   .prev-button:hover,
   .next-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity : 1;
   }
 
   .left-arrow {
@@ -118,7 +121,6 @@ const Slidestyle = styled.div`
     border-width: 10px 0 10px 15px;
     border-color: transparent transparent transparent white;
   }
-
   @media screen and (max-width: 1000px){
     .slide img{
       height: 400px;
@@ -153,7 +155,6 @@ const Slidestyle = styled.div`
 const SlideShow: React.FC<SlideShowProps> = ({ slideData, transitionTime = 3000, dotColor }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement>(null);
-  //console.log(slideData);
   useEffect(() => {
     const slideInterval = setInterval(() => {
       if (!slideData || slideData.length === 0) return;

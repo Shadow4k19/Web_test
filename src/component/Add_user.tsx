@@ -57,7 +57,6 @@ const Add_user : React.FC = () => {
         try {
             if(combinedData){
                 const response = await axios.post("http://localhost/Server/User.php"||"http://localhost:8080/userapi/user", combinedData);
-                console.log(response.data);
                 if (response.data.status === 201) {
                     Swal.fire({
                         icon: "success",
@@ -103,15 +102,27 @@ const Add_user : React.FC = () => {
                             value={combinedData.password || ''}
                             onChange={(e) => setCombinedData({ ...combinedData, password: e.target.value })}
                         />
-                        <label htmlFor="role" className="form-label">Role</label>
-                        <input
-                            type="text"
-                            placeholder="Role"
-                            required
-                            className="form-control input-width"
-                            value={combinedData.role || ''}
-                            onChange={(e) => setCombinedData({ ...combinedData, role: e.target.value })}
-                        />
+                        <div className="div">
+                            <label htmlFor="role" className="form-label">Role</label>
+                        </div>                            
+                        <label>
+                            <input
+                                type="radio"
+                                value="Admin"
+                                checked={combinedData.role === 'admin'}
+                                onChange={(e) => setCombinedData({...combinedData, role: e.target.value})}
+                            />
+                            Admin
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="User"
+                                checked={combinedData.role === 'user'}
+                                onChange={(e) => setCombinedData({...combinedData, role: e.target.value})}
+                            />
+                            User
+                        </label>
                         <div className="row">
                             <div className="col-md-4 mb-3">
                                 <label htmlFor="Feburary">February</label>

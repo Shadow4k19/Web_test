@@ -141,7 +141,6 @@ const EditContent = () => {
     };
   
     const handleSubmit = async () => {
-        console.log("Submitting");
         try {
           if (!title || !content) {
             Swal.fire({
@@ -175,7 +174,6 @@ const EditContent = () => {
                 'Content-Type': 'application/json',
             }
           });
-          console.log(response.data);
           if (response.data.status === 200) {
             Swal.fire({
               icon: "success",
@@ -190,7 +188,6 @@ const EditContent = () => {
             });
           }
         } catch (error) {
-          console.error("Error during submission", error);
           Swal.fire({
             icon: "error",
             text: "An error occurred during submission",
@@ -198,21 +195,32 @@ const EditContent = () => {
         }
       };
   
-    const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-      if (files && files.length > 0) {
-        const file = files[0];
-        const fileName = file.name.toLowerCase();
-        if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
-          setFile(file);
-        } else {
-          Swal.fire({
-            icon: "error",
-            text: "Only PNG, JPG, and JPEG files are allowed.",
-          });
-          e.target.value = "";
+      const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            const fileName = file.name.toLowerCase();
+            const maxSize = 500000; 
+    
+            if (file.size > maxSize) {
+                Swal.fire({
+                    icon: "error",
+                    text: 'File size exceeds the 500 KB limit.'
+                });
+                e.target.value = '';
+                return;
+            }
+    
+            if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
+                setFile(file);
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    text: 'Only PNG, JPG, and JPEG files are allowed.'
+                });
+                e.target.value = '';
+            }
         }
-      }
     };
   
     return (

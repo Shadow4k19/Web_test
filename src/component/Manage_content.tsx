@@ -12,8 +12,11 @@ interface tabledata {
     title : string;
     content : string;
 }
+interface style{
+    load : boolean;
+}
 
-const Slide_manage = styled.div`
+const Slide_manage = styled.div<style>`
     .section{
         min-height: 100vh;
         height: auto;
@@ -25,6 +28,8 @@ const Slide_manage = styled.div`
         border-radius: 5px;
         //width: 50%;
         //border: 2px solid #000;
+        height : ${({ load }) => (load ? '30rem' : 'auto')};
+        align-content: center;  
     }
     h1{
         color: #000;
@@ -52,6 +57,9 @@ const Slide_manage = styled.div`
     .btn-con{
         justify-content: space-between;
     }
+    .rdt_TableCell{
+        overflow : auto;
+    }
     button{
         margin: 1.1px;
     }
@@ -63,12 +71,6 @@ const Slide_manage = styled.div`
         justify-content: flex-end;
         align-items: flex-end;
         padding-bottom: 10px;
-    }
-    .gDXgoE{
-        background-color:#C4A1A1;
-    }
-    .cIAsRk{
-        min-width: 130px;
     }
     btn-con-table{
         display: flex;
@@ -121,7 +123,7 @@ const Slide_manage = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .cell-content{
@@ -136,6 +138,19 @@ const Slide_manage = styled.div`
         border-radius: 17px;
         padding: 15px 0 15px 0;
     }
+
+    .cell-id{
+        padding : 0 0 0 30px;
+    }
+
+    .jfRBrS{
+        background-color :  #CCBEBE;
+    }
+
+    .dbBgUh:disabled{
+        fill : rgb(0 0 0 / 48%);
+    }
+
     @media screen and (max-width:1200px){
         .btn-success, .btn-danger{
             width: 80px;
@@ -150,6 +165,7 @@ const Slide_manage = styled.div`
     @media screen and (max-width: 768px){
         .text-con{
             width: 120px;
+            top: 10%;
         }
         .text-title{
             font-size: 20px;
@@ -185,20 +201,28 @@ const ManageContent : React.FC = () =>{
     const [search , setSerch] = useState("");
 
     const [data, setData] = useState<tabledata[]>([])
+    const [filterdata, setFilteredata] = useState<tabledata[]>([]);
+    
     useEffect (() => {
         fetchdata();
-    },[])
+    },[]);
 
+    useEffect(() => {
+        const result = data?.filter((item) => {
+          return item.title.toString().toLowerCase().includes(search.toLowerCase());
+        });
+        setFilteredata(result);
+    }, [search, filterdata]);
 
     const fetchdata = async() =>{
         try{
             const response = await axios.get("http://localhost/Server/Content.php" || "http://localhost:8080/contentapi/content");
-            console.log(response.data);
             if(response){
                 setData(response.data.data);
+                setFilteredata(response.data.data);
                 setLoading(false);
             }else{
-                console.log("DATA ERROR");
+                setLoading(true);
             }
         }catch(error){
             console.log(error);
@@ -226,7 +250,7 @@ const ManageContent : React.FC = () =>{
             
             if (result.isConfirmed) {
                 try {
-                    const response = await fetch("http://localhost/Server/Content.php" ||'http://localhost:8080/contentapi/content', {
+                    const response = await fetch('http://localhost/Server/Content.php' || 'http://localhost:8080/contentapi/content', {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -268,7 +292,7 @@ const ManageContent : React.FC = () =>{
     }
     const columns: TableColumn<tabledata>[] = [
         { name: 'ID', selector: (row: tabledata) => row.id, sortable: true, cell: (row : tabledata) =>
-            <div className="cell">{row.id}</div>
+            <div className="cell-id">{row.id}</div>
         },
         {name: 'Title', selector: (row: tabledata) => row.title, sortable: false, cell: (row : tabledata) =>
             <div className="cell">{row.title}</div>
@@ -297,7 +321,7 @@ const ManageContent : React.FC = () =>{
         },
     ]
     return(
-        <Slide_manage>
+        <Slide_manage load={loading}>
             <div className="section">
                 <div className="container">
                     <div className="inside-con">
@@ -315,7 +339,7 @@ const ManageContent : React.FC = () =>{
                             <>
                             <DataTable
                                 columns={columns}
-                                data={data}
+                                data={filterdata}
                                 pagination
                                 highlightOnHover
                                 theme="solarized"
@@ -325,7 +349,7 @@ const ManageContent : React.FC = () =>{
                                     <div className="input">
                                         <input 
                                         type="text"
-                                        placeholder="Search by url" 
+                                        placeholder="Search by title" 
                                         className = "form-control"
                                         value={search}
                                         onChange={(e) => setSerch(e.target.value)}

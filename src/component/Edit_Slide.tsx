@@ -111,13 +111,8 @@ const EditSlide : React.FC = () =>{
         fetchdata();
     },[])
 
-
-    useEffect (() => {
-        console.log(idx);
-    },[idx])
     const fetchdata = async() =>{
         const response = await axios.get(`http://localhost/Server/Slideshow.php?id=${id}` || `http://localhost:8080/slideshowapi/slideshows/${id}`);
-        console.log(response.data);
         if(response.data.status === 200){
             setIdx(response.data.data[0].id);
         }else{
@@ -137,7 +132,6 @@ const EditSlide : React.FC = () =>{
     };
 
     const handleSubmit = async () => {
-        console.log("Submitting");
         try {
             if (file && idx) {
                 const reader = new FileReader();
@@ -155,7 +149,6 @@ const EditSlide : React.FC = () =>{
                                 'Content-Type': 'application/json'
                             }
                         });
-                        console.log(response.data);
                         if (response.status === 200) {
                             Swal.fire({
                                 icon: "success",
@@ -195,6 +188,17 @@ const EditSlide : React.FC = () =>{
         if (files && files.length > 0) {
             const file = files[0];
             const fileName = file.name.toLowerCase();
+            const maxSize = 500000; 
+    
+            if (file.size > maxSize) {
+                Swal.fire({
+                    icon: "error",
+                    text: 'File size exceeds the 500 KB limit.'
+                });
+                e.target.value = '';
+                return;
+            }
+    
             if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
                 setFile(file);
             } else {
@@ -205,7 +209,8 @@ const EditSlide : React.FC = () =>{
                 e.target.value = '';
             }
         }
-    };    
+    };
+    
     return(
         <AddSlidestyle>
         <div className="container-login">

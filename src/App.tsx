@@ -8,10 +8,9 @@ import Register from './component/Register';
 import NotFound from './component/NotFoundPage';
 import SortingPage from './component/SortingPage';
 import TicTacTo from './component/TicTacTo';
-import Footer from './component/footer';
 import MineSwiper from './component/Minesweeper';
 import DashBoard from './component/Dashboard';
-import User from './component/User';
+import User from './component/Manage_User';
 import Edit_user from './component/Edit_user';
 import Add_user from './component/Add_user';
 import { useEffect, useState } from 'react';
@@ -27,6 +26,7 @@ import EditSlide from './component/Edit_Slide';
 import AddContent from './component/Add_Content';
 import EditContent from './component/Edit_content';
 import NewsPage from './component/News_page';
+
 
 interface Props{
   currentpath: string;
@@ -93,7 +93,6 @@ const App: React.FC<Props> = ({currentpath}: any) => {
         >
           เราใช้คุกกี้เพื่อเพิ่มประสิทธิภาพ และประสบการณ์ที่ดีในการใช้งานเว็บไซต์ คุณสามารถเลือกตั้งค่า<br/>ความยินยอมการใช้คุกกี้ได้ โดยคลิก "การตั้งค่าคุกกี้" นโยบายความเป็นส่วนตัว
       </CookieConsent>
-      <Footer />
     </div>
     </>
   )

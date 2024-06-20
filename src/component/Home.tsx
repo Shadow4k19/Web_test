@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SlideData from "./Slide_data";
 import Carddata from "./CardData";
+import Footer from "./footer";
 
 const HomeCon = styled.div`
   .container-home {
@@ -9,7 +10,7 @@ const HomeCon = styled.div`
     margin: 0;
     padding: 0;
     padding-top: 50px;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   .slider-container {
@@ -210,7 +211,6 @@ const HomeCon = styled.div`
 
   .block-s{
     animation: appear-s 1s ease-in-out;
-
   }
   .block-middle {
     animation: appear-mid 1s ease-in-out;
@@ -222,6 +222,9 @@ const HomeCon = styled.div`
     animation: appear-b 1s ease-in-out;
   }
   
+  .icon{
+    padding : 0 5px 0 5px;
+  }
 
   @media screen and (max-width: 1000px) {
     .card-container {
@@ -264,10 +267,10 @@ const Home = () => {
   return (
     <HomeCon>
       <div className="container-home">
-        <div id="home" className="slider-container section block-s">
+        <div id="home" className="slider-container section block block-s">
           <SlideData />
         </div>
-        <div id="about" className="about-container section2 block-middle">
+        <div id="about" className="about-container section2 block block-middle">
           <div className="card-con">
             <div className="img-con">
               <img
@@ -280,28 +283,30 @@ const Home = () => {
               <div className="text-con">
                 <h1 className="title">
                   <u>About Us</u>
+                  <i className="fa fa-address-book icon"></i>
                 </h1>
               </div>
-              <h5 className="head">Name:</h5>
+              <h5 className="head"><i className="fa fa-user-circle icon"></i>Name:</h5>
               <h6 className="sub">Unknown</h6>
-              <h5 className="head">Information:</h5>
+              <h5 className="head"><i className="fa fa-address-card icon"></i>Information:</h5>
               <h6 className="sub">
                 Don't have information about this guy who made this website.
               </h6>
             </div>
           </div>
         </div>
-        <div id="contact" className="contact-us-con section2 block-middle-r">
+        <div id="contact" className="contact-us-con section2 block block-middle-r">
           <div className="card-con">
             <div className="content-container">
               <div className="text-con">
                 <h1 className="title">
                   <u>Contact us</u>
+                  <i className="fa fa-address-book icon"></i>
                 </h1>
               </div>
-              <h5 className="head">Tel:</h5>
+              <h5 className="head"><i className="fa fa-phone icon"></i>Tel:</h5>
               <h6 className="sub">094-999-1234</h6>
-              <h5 className="head">Address:</h5>
+              <h5 className="head"><i className="fa fa-address-card icon"></i>Address:</h5>
               <h6 className="sub">Somewhere in the universe</h6>
             </div>
             <div className="img-con">
@@ -313,9 +318,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div id="content" className="card-container section block-b">
+        <div id="content" className="card-container section block block-b">
           <Carddata />
         </div>
+        <Footer />
       </div>
     </HomeCon>
   );

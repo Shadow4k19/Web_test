@@ -207,7 +207,6 @@ const DashBoard: React.FC = () => {
     if (loginstatus && username) {
       try {
         const response = await axios.get(`http://localhost/Server/DashBoard.php?username=${username}` || `http://localhost:8080/dashboardapi/dashboard/${username}`);
-        console.log(response.data.data);
         if (response.data.status === 200) {
           const responseData = response.data.data;//Express use const responseData = response.data.data[0];
           setData(responseData); 

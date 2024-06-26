@@ -5,7 +5,6 @@ const NewsStyle = styled.div`
         min-height: 100vh;
         height: auto;
         padding: 20px;
-        background-color: #f5f5f5;
     }
     .container {
         width: 100%;
@@ -55,6 +54,10 @@ const NewsStyle = styled.div`
         font-size: 16px;
         text-align: justify;
     }
+    .ref-con{
+        display: flex;
+        justify-content: flex-end;
+    }
     @media screen and (max-width : 768px){
         p {
             text-align : center;
@@ -70,7 +73,9 @@ const NewsPage_Default1: React.FC = () => {
                 <div className="container">
                     <div className="inside-con">
                         <div className="img-con">
-                            <img src="" alt="" className="" />
+                            <img src="https://s.france24.com/media/display/e6279b3c-db08-11ee-b7f5-005056bf30b7/w:1024/p:16x9/news_en_1920x1080.jpg" 
+                                alt="" 
+                                className="" />
                         </div>
                         <div className="title-con">
                             <h2>Test</h2>
@@ -87,7 +92,12 @@ const NewsPage_Default1: React.FC = () => {
                             </p>
                             <p>   
                                 แต่ผู้ถูกกล่าวหากลับได้รับการปฎิบัติแบบวีไอพี มีการปกป้องทุกอย่าง สุดท้ายรถออกไป ก็ยังมีรถตามไปอีก ในขณะที่ตนเองเป็นผู้เสียหาย ต้องนั่งรถมอเตอร์ไซค์กลับบ้าน จึงกังวลว่า ถ้าตาสีตาสาจะทำยังไง รู้สึกเป็นห่วงประชาชน และมองว่าการให้พิมพ์ลายนิ้วมือข้างล่าง จะกลายเป็นบรรทัดฐานในเคสอื่นๆ
-                            </p> 
+                            </p>
+                            <div className="ref-con">
+                                <p className="ref"> 
+                                    Referance by thairath tv ทำเพื่อฝึกพัฒนาเว็บไซต์เท่านั้น
+                                </p> 
+                            </div>
                         </div>
                     </div>
                 </div>

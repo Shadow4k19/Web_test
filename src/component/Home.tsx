@@ -12,13 +12,13 @@ const HomeCon = styled.div`
     padding: 0;
     padding-top: 50px;
     overflow: hidden;
+    background-color: #FEFFD2;
   }
 
   .slider-container {
     display: flex;
     width: 100%;
-    background-color: #F5D7FF;
-    margin-bottom: 60px;
+    background-color: #FFBF78;
   }
 
   .card-container {
@@ -65,8 +65,6 @@ const HomeCon = styled.div`
   .card-content .content-p {
     max-height: 20px;
     overflow: hidden;
-    //white-space: nowrap;
-    //text-overflow: ellipsis;
   }
 
   .card-content h3 {
@@ -85,7 +83,7 @@ const HomeCon = styled.div`
     padding: 8px 16px;
     background-color: #333;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 20px;
     margin-top: 16px;
     color: #fff;
     width: 100%;
@@ -129,7 +127,13 @@ const HomeCon = styled.div`
   .section2 {
     position: relative;
     padding-top: 60px;
-    margin-top: -60px;
+    margin-top: -80px;
+  }
+
+  .section3{
+    position : relative;
+    padding : 40px 0 0 0;
+    margin : -40px 0 0 0;
   }
 
   .sub,
@@ -148,7 +152,7 @@ const HomeCon = styled.div`
   .text-con {
     display: flex;
     justify-content: center;
-    background-color: #C3BCBC;
+    background-color: #FFBF78;
     transform: skewX(10deg);
     padding: 20px;
     margin: 20px 0 20px 40px;
@@ -156,11 +160,12 @@ const HomeCon = styled.div`
     border-radius: 10px;
   }
 
-  .contact-us-con {
+  .time-con {
     display: flex;
     justify-content: center;
     justify-content: space-around
     width: 100%;
+    margin : 0 0 0px 0;
   }
 
   .content-container {
@@ -169,7 +174,7 @@ const HomeCon = styled.div`
     align-items: flex-start;
     flex: 1;
   }
-
+  
   @keyframes appear-s{
     from{
       opacity: 0;
@@ -228,7 +233,6 @@ const HomeCon = styled.div`
   .icon{
     padding : 0 5px 0 5px;
   }
-
   @media screen and (max-width: 1000px) {
     .card-container {
       grid-template-columns: repeat(2, auto);
@@ -273,7 +277,12 @@ const Home = () => {
         <div id="home" className="slider-container section block block-s">
           <SlideData />
         </div>
-        <div id="about" className="about-container section2 block block-middle">
+        <div id="time" className="time-con section2 block block-middle-r">
+          <div className="card-con expand">
+            <Digital_Clock />
+          </div>
+        </div>
+        <div id="about" className="about-container section3 block block-middle">
           <div className="card-con">
             <div className="img-con">
               <img
@@ -298,31 +307,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div id="contact" className="contact-us-con section2 block block-middle-r">
-          <div className="card-con">
-            {/*<div className="content-container">
-              <div className="text-con">
-                <h1 className="title">
-                  <u>Contact us</u>
-                  <i className="fa fa-address-book icon"></i>
-                </h1>
-              </div>
-              <h5 className="head"><i className="fa fa-phone icon"></i>Tel:</h5>
-              <h6 className="sub">094-999-1234</h6>
-              <h5 className="head"><i className="fa fa-address-card icon"></i>Address:</h5>
-              <h6 className="sub">Somewhere in the universe</h6>
-            </div>
-            <div className="img-con">
-              <img
-                src="https://img.freepik.com/free-photo/business-financial-concept-with-magnifying-glass-question-mark-yellow-background-flat-lay_176474-6555.jpg"
-                alt=""
-                style={{ borderRadius: "5px", width: "250px", height: "300px" }}
-              />
-            </div>*/}
-            <Digital_Clock />
-          </div>
-        </div>
-        <div id="content" className="card-container section block block-b">
+        <div id="content" className="card-container section3 block block-b">
           <Carddata />
         </div>
         <Footer />

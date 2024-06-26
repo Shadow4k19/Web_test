@@ -27,10 +27,8 @@ const Slide_manage = styled.div<style>`
     }
     .container{ 
         color: #fff;
-        background-color: #CCBEBE;
+        background-color: #FF7D29;
         border-radius: 5px;
-        //width: 50%;
-        //border: 2px solid #000;
         height :${({ load }) => (load ==='true' ? '30rem' : 'auto')};
         align-content: center;  
     }
@@ -57,6 +55,44 @@ const Slide_manage = styled.div<style>`
         background-color: #4B4B4B;
       }
       
+       .gDXgoE{
+        //dropdown list
+        background-color:#FFBF78;
+    }
+
+    .jnYXCw {
+        //header table
+        background-color : #FFBF78;
+    }
+    
+    .jGKeEe{
+        //footer
+        background-color : #FFBF78;
+    }
+    .rdt_TableRow,
+    .rdt_TableCol,{
+    background-color: #FFEEA9;
+} .gDXgoE{
+        //dropdown list
+        background-color:#FFBF78;
+    }
+
+    .jnYXCw {
+        //header table
+        background-color : #FFBF78;
+    }
+    
+    .jGKeEe{
+        //footer
+        background-color : #FFBF78;
+    }
+    .rdt_TableRow,
+    .rdt_TableCol,{
+        background-color: #FFEEA9;
+    }
+    .kvDdmV {
+        background-color: #FFEEA9;
+    }
     .btn-con{
         justify-content: space-between;
     }
@@ -109,8 +145,7 @@ const Slide_manage = styled.div<style>`
         margin-bottom: 20px;
         position: absolute;
         top: 13%;
-        background-color: #CCBEBE;
-        //border: 2px solid #000;
+        background-color: #FFBF78;
         border-radius: 5px;
         padding: 0 10px;
     }
@@ -347,7 +382,6 @@ const ManageContent : React.FC = () =>{
                                 columns={columns}
                                 data={filterdata}
                                 pagination
-                                highlightOnHover
                                 theme="solarized"
                                 subHeaderAlign={Alignment.RIGHT}
                                 subHeader

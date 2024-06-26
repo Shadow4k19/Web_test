@@ -108,7 +108,8 @@ const AddContent : React.FC = () =>{
     const [content4, setContent4] = useState("");
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-
+    
+    //Event to handle drag drop file
     const onDragEnter = () => {
         wrapperRef.current?.classList.add('dragover');
     };
@@ -116,11 +117,12 @@ const AddContent : React.FC = () =>{
     const onDragLeave = () => {
         wrapperRef.current?.classList.remove('dragover');
     };
-
+    
     const onDrop = () => {
         wrapperRef.current?.classList.remove('dragover');
     };
 
+    //handle submit
     const handleSubmit = async() => {
         try{
             if(file && title && content && content2 && content3 && content4){
@@ -160,7 +162,7 @@ const AddContent : React.FC = () =>{
         }
     };
 
-
+    //Event to handle drag drop file
     const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {

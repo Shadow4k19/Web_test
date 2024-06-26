@@ -13,7 +13,7 @@ const MineStyle = styled.div`
     height: auto;
     min-height: 100vh;
     overflow: hidden;
-    background-color: #CCBEBE;
+    background-color: #FFBF78;
     border-radius: 5px;
   }
   h1 {
@@ -21,6 +21,31 @@ const MineStyle = styled.div`
     padding-top: 5%; 
     font-size: 120px;
     font-weight: normal;
+  }
+  
+  h1:hover{
+    transform : scale(1.2);
+    transition : transform 0.5s ease-in-out;
+    animation : Text-color 2s ease-in-out;
+  }
+
+  @keyframes Text-color{
+    0%{
+      color: black;
+    }
+      50%{
+        color : red;
+      }
+    100%{
+      color : black;
+    }
+
+  }
+  .text-cont{
+    display :flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
   #grid {
     margin-left: auto;
@@ -215,7 +240,11 @@ const MineSwiper : React.FC = () => {
   return (
     <MineStyle>
       <div className="container-lg">
-        <h1>MineSweeper</h1>
+        <div className="text-cont">
+          {['M','i','n','e','S','w','e','e','p','e','r'].map((letter, index) => (
+                      <h1 key={index}>{letter}</h1>
+          ))}
+        </div>
         <table id="grid">
           <tbody>
             {grid.map((row, rowIndex) => (

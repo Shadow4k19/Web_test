@@ -110,7 +110,7 @@ const EditSlide : React.FC = () =>{
     useEffect (() => {
         fetchdata();
     },[])
-
+    //handle get data form database
     const fetchdata = async() =>{
         const response = await axios.get(`http://localhost/Server/Slideshow.php?id=${id}` || `http://localhost:8080/slideshowapi/slideshows/${id}`);
         if(response.data.status === 200){
@@ -119,6 +119,8 @@ const EditSlide : React.FC = () =>{
             console.log("error");
         }
     }
+
+    //handle Drag and Drop flie event
     const onDragEnter = () => {
         wrapperRef.current?.classList.add('dragover');
     };
@@ -130,7 +132,7 @@ const EditSlide : React.FC = () =>{
     const onDrop = () => {
         wrapperRef.current?.classList.remove('dragover');
     };
-
+    //handle submit
     const handleSubmit = async () => {
         try {
             if (file && idx) {
@@ -182,7 +184,8 @@ const EditSlide : React.FC = () =>{
             });
         }
     };    
-
+    
+    //handle Drag and Drop flie event
     const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {

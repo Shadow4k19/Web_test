@@ -18,7 +18,6 @@ const NewsStyle = styled.div`
         min-height: 100vh;
         height: auto;
         padding: 20px;
-        background-color: #f5f5f5;
     }
     .container {
         width: 100%;

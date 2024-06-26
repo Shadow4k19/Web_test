@@ -44,6 +44,7 @@ const StyleBurger = styled.div<StyleBurgerProps>`
 `;
 
 const Burger : React.FC = () => {
+    //burger menu
     const [open, setOpen] = useState(false);
 
     return (

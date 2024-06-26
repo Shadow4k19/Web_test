@@ -15,7 +15,7 @@
             padding: 5% 0 2% 0;
             flex-direction: column;
             overflow: hidden;
-            background-color: #CCBEBE;
+            background-color: #FFEEA9;
             border-radius: 5px;
         }
         .container h1 {
@@ -30,6 +30,7 @@
             background-color: rgba(255, 255, 255, 0.5);
             border-radius: 5px;
             padding: 10px; 
+            border: 1px solid #000;
         }
         .modal {
             display: flex;
@@ -83,13 +84,59 @@
             width: 320px;
             cursor: pointer;
             background: #fff;
-            color: #000;
+            color: #fff;
             font-weight: 600;
             background-color: #f11111;
         }
     button:active{
         transform: scale(0.94);
     }
+
+    @keyframes left {
+    from {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    }
+
+    @keyframes middle {
+        from {
+            opacity: 0;
+            transform: translateY(-200px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
+
+    @keyframes right {
+        from {
+            opacity: 0;
+            transform: translateX(200px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+    .span1 {
+        animation: left 1s ease-in-out;
+    }
+
+    .span2 {
+        animation: middle 1s ease-in-out;
+    }
+
+    .span3 {
+        animation: right 1s ease-in-out;
+    }
+
     @media screen and (max-width: 700px){
         #gameboard{
             width: 350px;
@@ -220,7 +267,7 @@
             <TicTacToCss>
                 <div className="section">
                     <div className="container">
-                        <h1>Tic Tac Toe</h1>
+                        <h1><span className="span1">Tic</span> <span className="span2">Tac</span> <span className="span3">Toe</span></h1>
                         <div id="gameboard">
                         {spaces.map((value, index) => (
                             <div

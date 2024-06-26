@@ -13,6 +13,9 @@ const Registerstyle = styled.div`
   .input-width{
     width: 380px;
   }
+    .form-check-input{
+        margin : 0 10px 0px 15px;
+    }
   @media screen and (max-width: 600px){
     .login-container{
         width: 300px;
@@ -70,6 +73,7 @@ const Edit_user : React.FC = () => {
         April: ""
     });
 
+    //handle submit
     const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
@@ -99,7 +103,8 @@ const Edit_user : React.FC = () => {
             console.error(error);
         }
     };
-
+    
+    //handle get data form database
     const fetchData = async () => {
         try {
             const response = await axios.get<{ data: { user: User[]; dashboard: Dashboard[] } }>(`http://localhost/Server/User.php?username=${username}` || `http://localhost:8080/userapi/user/${username}`);
@@ -149,7 +154,8 @@ const Edit_user : React.FC = () => {
             console.error(error);
         }
     }
-
+    
+    //will start when webpage render once 
     useEffect(() => {
         fetchData();
     }, []);

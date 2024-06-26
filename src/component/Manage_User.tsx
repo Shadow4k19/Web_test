@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import 'datatables.net';
 import styled from "styled-components";
 import axios from "axios";
-import DataTable, { createTheme , TableColumn , Alignment} from 'react-data-table-component';
+import DataTable, { createTheme,TableColumn , Alignment} from 'react-data-table-component';
 import Swal from "sweetalert2";
-
 
 createTheme('solarized', {
     text: {
@@ -12,10 +11,10 @@ createTheme('solarized', {
       secondary: '#000',
     },
     background: {
-      default: '#C4A1A1',
+      default: '#000',
     },
     context: {
-      background: '#cb4b16',
+      background: '#000',
       text: '#000',
     },
     divider: {
@@ -36,7 +35,7 @@ const User_manage = styled.div<Style>`
     }
     .container{ 
         color: #fff;
-        background-color: #CCBEBE;
+        background-color: #FF7D29;
         border-radius: 5px;
         height : ${({ load }) => (load ==='true' ? '30rem' : 'auto')};
          align-content: center;  
@@ -61,8 +60,9 @@ const User_manage = styled.div<Style>`
         vertical-align: middle;
         text-align: center;
       }
-      table.dataTable tr:hover {
-        background-color: #4B4B4B;
+
+        table.dataTable tr:hover {
+            background-color: #0000;
       }
       
     .btn-con{
@@ -81,8 +81,28 @@ const User_manage = styled.div<Style>`
         padding-bottom: 10px;
     }
     .gDXgoE{
-        background-color:#C4A1A1;
+        //dropdown list
+        background-color:#FFBF78;
     }
+
+    .jnYXCw {
+        //header table
+        background-color : #FFBF78;
+    }
+    
+    .jGKeEe{
+        //footer
+        background-color : #FFBF78;
+    }
+    .rdt_TableRow,
+    .rdt_TableCol,{
+        background-color: #FFEEA9;
+    }
+
+    .kvDdmV {
+        background-color: #FFEEA9;
+    }
+
     .cIAsRk{
         min-width: 130px;
     }
@@ -123,16 +143,12 @@ const User_manage = styled.div<Style>`
         margin-bottom: 20px;
         position: absolute;
         top: 13%;
-        background-color: #CCBEBE;
-        //border: 2px solid #000;
+        background-color: #FFBF78;
         border-radius: 5px;
         padding: 0 10px;
     }
     p{
         margin: 2% 0 0 0;
-    }
-    .jfRBrS{
-        background-color :  #CCBEBE;
     }
 
     .dbBgUh:disabled{
@@ -148,14 +164,16 @@ const User_manage = styled.div<Style>`
             width: 80px;
         }
         .text-con{
-            top: ${({ load }) => (load ? '15%' : '5%')};
+            top: ${({ load }) => (load ? '12%' : '5%')};
+        }
+        .add{
+            margin : 10px 0 0 0;
         }
     }
     
     @media screen and (max-width: 768px){
         .text-con{
             width: 120px;
-            margin: 30px 0 0 0;
         }
         .text-title{
             font-size: 20px;
@@ -209,8 +227,6 @@ const UserComponent: React.FC = () => {
         fetchData();    
     }, []);
     const caseInsensitiveSort = (rowA : any, rowB : any) => {
-        console.log(typeof(rowA.id));
-        //console.log(rowA);
         let a, b;
             a = Number(rowA.id);
             b = Number(rowB.id);
@@ -385,7 +401,6 @@ const UserComponent: React.FC = () => {
                                 columns={columns}
                                 data={filteredData}
                                 pagination
-                                highlightOnHover
                                 theme="solarized"
                                 subHeaderAlign={Alignment.RIGHT}
                                 subHeader

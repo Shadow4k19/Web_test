@@ -11,6 +11,7 @@ interface data {
 }
 
 const Card : React.FC<data> = ({carddata}) =>{
+    //card show
     return (
         <div className="card">
             <img src = {carddata.img} 

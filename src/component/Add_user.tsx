@@ -12,6 +12,9 @@ const Registerstyle = styled.div`
   .input-width{
     width: 380px;
   }
+    .form-check-input{
+        margin : 0 10px 0px 15px;
+    }
   @media screen and (max-width: 600px){
     .login-container{
         width: 300px;
@@ -52,6 +55,7 @@ const Add_user : React.FC = () => {
         April: ""
     });
 
+    //handle submit
     const handleSubmit : React.MouseEventHandler<HTMLButtonElement> = async(e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {

@@ -8,7 +8,7 @@ const Nav = styled.nav`
     padding: 5px 20px;
     display: flex;
     justify-content: space-between;
-    background: #fff;
+    background: #FF7D29;
     position: fixed;
     z-index: 999999;
     .logo {

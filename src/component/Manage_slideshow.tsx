@@ -24,10 +24,8 @@ const Slide_manage = styled.div<Style>`
     }
     .container{ 
         color: #fff;
-        background-color: #CCBEBE;
+        background-color: #FF7D29;
         border-radius: 5px;
-        //width: 50%;
-        //border: 2px solid #000;
         height : ${({ load }) => (load ==='true' ? '30rem' : 'auto')};
         align-content: center;  
     }
@@ -53,6 +51,28 @@ const Slide_manage = styled.div<Style>`
       table.dataTable tr:hover {
         background-color: #4B4B4B;
       }
+         .gDXgoE{
+        //dropdown list
+        background-color:#FFBF78;
+    }
+
+    .jnYXCw {
+        //header table
+        background-color : #FFBF78;
+    }
+    
+    .jGKeEe{
+        //footer
+        background-color : #FFBF78;
+    }
+    .rdt_TableRow,
+    .rdt_TableCol,{
+        background-color: #FFEEA9;
+    }
+    
+    .kvDdmV {
+        background-color: #FFEEA9;
+    }
       
     .btn-con{
         justify-content: space-between;
@@ -112,8 +132,7 @@ const Slide_manage = styled.div<Style>`
         margin-bottom: 20px;
         position: absolute;
         top: 70px;
-        background-color: #CCBEBE;
-        //border: 2px solid #000;
+        background-color: #FFBF78;
         border-radius: 5px;
         padding: 0 10px;
     }
@@ -318,7 +337,6 @@ const ManageSlideshow : React.FC = () =>{
                                 columns={columns}
                                 data={filterdata || []}
                                 pagination
-                                highlightOnHover
                                 theme="solarized"
                                 subHeaderAlign={Alignment.RIGHT}
                                 subHeader

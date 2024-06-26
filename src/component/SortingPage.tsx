@@ -12,7 +12,7 @@ const SortingStyle = styled.div`
     flex-direction: column;
     padding: 0 0 5% 0; 
     overflow-x: hidden;
-    background-color: #CCBEBE;
+    background-color: #FFBF78;
     border-radius: 5px;
   }
   
@@ -47,9 +47,6 @@ const SortingStyle = styled.div`
       margin: 5px 0;
     }
 
-    .container{
-        padding-top: 20%;
-    }
   }
   @media screen and (max-width: 900px) and (max-height: 600px){
     .btn-container{

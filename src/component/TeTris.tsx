@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 const TetrisStyle = styled.div`
   .container {
-    background-color: #282828;
+    background-color: #FFEEA9;
     color: #fff;
     font-size: 2em;
     text-align: center;
@@ -14,7 +14,7 @@ const TetrisStyle = styled.div`
   }
 
   canvas {
-    border: solid 0.2em #fff;
+    border: solid 0.2em #FF7D29;
   }
   .modal {
     display: flex; 
@@ -329,7 +329,7 @@ const Tetris : React.FC = () => {
   return (
     <TetrisStyle>
       <div className="container">
-        <div id="score"></div>
+        <div id="score" style={{textShadow: '-1px 1px 0 #000 , 1px 1px 0 #000'}}></div>
         <div className="guide-con">
             <div className="inside-guidecon">
               <h2>!GUIDE!</h2>

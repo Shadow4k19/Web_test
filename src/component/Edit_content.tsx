@@ -133,7 +133,7 @@ const EditContent = () => {
     };
   
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-  
+    //handle drag and drop event
     const onDragEnter = () => {
       wrapperRef.current?.classList.add("dragover");
     };
@@ -145,7 +145,7 @@ const EditContent = () => {
     const onDrop = () => {
       wrapperRef.current?.classList.remove("dragover");
     };
-  
+    //handle submit
     const handleSubmit = async () => {
         try {
           if (!title || !content || !content2 || !content3 || !content4) {
@@ -203,7 +203,7 @@ const EditContent = () => {
           });
         }
       };
-  
+      //handle drag and drop file
       const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {

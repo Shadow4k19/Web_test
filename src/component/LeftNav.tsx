@@ -46,9 +46,14 @@ const Ul = styled.ul<StyleProps>`
   ul {
     padding: 0;
   }
+    
+  .btn-danger{
+    background-color : #2A629A;
+    border-radius : 15px;
+  }
   @media (max-width: 768px) {
     flex-flow: column nowrap;
-    background-color: #b040ec;
+    background-color: #FFA62F;
     position: fixed;
     transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
     top: 0;
@@ -140,20 +145,27 @@ const LeftNav: React.FC<LeftNavProps> = ({ open = false }) => {
       {path1 === '/' ? (
         <>
           <ul>
-            <li onClick={() => LinkTo('#about')}>About Us</li>
+            <li onClick={() => LinkTo('#time')}>Time</li>
           </ul>
           <ul>
-            <li onClick={() => LinkTo('#contact')}>Contact Us</li>
+            <li onClick={() => LinkTo('#about')}>About Us</li>
           </ul>
           <ul>
             <li onClick={() => LinkTo('#content')}>Content</li>
           </ul>
         </>
       ) : null}
-      {role === 'admin' ? (
+      {isLoggedIn ? (
+        <>
         <ul>
-          <li onClick={() => LinkTo('/systemmanagement')}>Management</li>
-        </ul>
+          <li onClick={() => LinkTo('/dashboard')}>Dashboard</li>
+        </ul>  
+          {role === 'admin' ? (
+            <ul>
+              <li onClick={() => LinkTo('/systemmanagement')}>Management</li>
+            </ul>
+          ) : null}
+          </>
       ) : null}
       <div className="container-btn">
         {isLoggedIn ? (

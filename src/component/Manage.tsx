@@ -89,7 +89,7 @@ const ManageStyle = styled.div`
     margin-bottom: 20px;
     position: absolute;
     top: 70px;
-    background-color: #fff;
+    background-color: #FFEEA9;
     border: 2px solid #CFCBD0;
     border-radius: 5px;
     padding: 0 10px 0 0px;

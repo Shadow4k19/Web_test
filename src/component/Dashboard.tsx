@@ -6,12 +6,11 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const DashBoardstyle = styled.div`
-
   .con-dash{
     padding: 50px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #CCBEBE;
+    background-color: #FFEEA9;
     border-radius: 5px;
     height: auto;
     min-height: 100vh;
@@ -156,6 +155,7 @@ const DashBoard: React.FC = () => {
     {Month: 'April', Primogem: 0}
   ]);
   
+  //useEffect to set default cookie
   useEffect(() => {
     if (Cookies.get('isLoggedIn')) {
       setLoginStatus(true);
@@ -166,10 +166,12 @@ const DashBoard: React.FC = () => {
     }
   }, []);
 
+  //useEffect will fetch data when username and login status was change.
   useEffect(() =>{
     fetchData();
   },[username , loginstatus]);
 
+  //useEffect will do when data was change.
   useEffect(() =>{
       const month : string[] = ['Feburary', 'March', 'April']
       addNewMonthData(month, data);
@@ -177,6 +179,7 @@ const DashBoard: React.FC = () => {
   
   const [width, setWidth] = useState(window.innerWidth);
 
+  //this useEffect to handle chart responsive
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -189,6 +192,7 @@ const DashBoard: React.FC = () => {
     };
   }, []);
 
+  //will change data when data was change
   const addNewMonthData = (months: string[], newData: DataObject[]) => {
     const newState: MonthData[] = [];
     for(let i = 0 ; i < months.length ; i++){
@@ -202,7 +206,7 @@ const DashBoard: React.FC = () => {
   };
   
   
-
+ //Get data form database
   const fetchData = async () => {
     if (loginstatus && username) {
       try {

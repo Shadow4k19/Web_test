@@ -84,6 +84,7 @@ const AddSlide: React.FC = () => {
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
+    //handle event drag and drop
     const onDragEnter = () => {
         wrapperRef.current?.classList.add('dragover');
     };
@@ -96,6 +97,7 @@ const AddSlide: React.FC = () => {
         wrapperRef.current?.classList.remove('dragover');
     };
 
+    //handle submit
     const handleSubmit = async () => {
         try {
             if (file) {
@@ -132,7 +134,7 @@ const AddSlide: React.FC = () => {
     };
     
 
-
+    //handle event drag and drop
     const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {

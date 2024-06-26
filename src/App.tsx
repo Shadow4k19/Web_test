@@ -16,7 +16,6 @@ import Add_user from './component/Add_user';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import CookieConsent from "react-cookie-consent";
-import Breakout from './component/Breakout';
 import Tetris from './component/TeTris';
 import Manage from './component/Manage';
 import ManageSlideshow from './component/Manage_slideshow';
@@ -27,6 +26,7 @@ import AddContent from './component/Add_Content';
 import EditContent from './component/Edit_content';
 import NewsPage from './component/News_page';
 import NewsPage_Default1 from './component/News_page_Default';
+import NewsPage_Default2 from './component/News_page_Default2';
 
 
 interface Props{
@@ -60,9 +60,9 @@ const App: React.FC<Props> = ({currentpath}: any) => {
           <Route path='/News/Sorting' element = {<SortingPage />} />
           <Route path='/News/TicTacTo' element = {<TicTacTo />} />
           <Route path='/News/MineSweeper' element = {<MineSwiper />} />
-          <Route path='/News/Breakout' element = {<Breakout />} />
           <Route path='/News/Tetris' element = {<Tetris />} />
           <Route path='/News/Default1' element = {<NewsPage_Default1/>} />
+          <Route path='/News/Default2' element = {<NewsPage_Default2 />} />
           <Route path='/News/:id' element = {<NewsPage />} />
           {loginstatus ? (
             <>

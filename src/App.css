@@ -4,6 +4,7 @@
   text-align: center;
   min-height: fit-content;
   height: auto;
+  background-color: #FEFFD2;
 }
 
 body{
@@ -22,7 +23,7 @@ body{
 .loader {
   width: 48px;
   height: 48px;
-  border: 5px solid #FFF;
+  border: 5px solid #C5C5C5;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -38,3 +39,7 @@ body{
       transform: rotate(360deg);
   }
   } 
+
+  .section{
+    background-color: #FEFFD2;
+  }
